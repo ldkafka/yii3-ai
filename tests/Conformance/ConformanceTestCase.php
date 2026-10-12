@@ -22,6 +22,7 @@ use Ldkafka\Ai\Message\Thinking;
 use Ldkafka\Ai\Message\ToolCall;
 use Ldkafka\Ai\Message\ToolResult;
 use Ldkafka\Ai\Model\Capability;
+use Ldkafka\Ai\Model\CostCalculator;
 use Ldkafka\Ai\Model\ModelCatalog;
 use Ldkafka\Ai\Model\ModelProfile;
 use Ldkafka\Ai\Pipeline\RetryMiddleware;
@@ -31,6 +32,7 @@ use Ldkafka\Ai\Provider\ProviderRegistry;
 use Ldkafka\Ai\Request;
 use Ldkafka\Ai\ResponseFormat;
 use Ldkafka\Ai\StopReason;
+use Ldkafka\Ai\Usage;
 use Ldkafka\Ai\Tests\Support\FixtureTransport;
 use Ldkafka\Ai\Tests\Support\RecordingTransport;
 use Ldkafka\Ai\Tool\ToolChoice;
@@ -43,10 +45,16 @@ use Ldkafka\Ai\Exception\ToolException;
 use PHPUnit\Framework\TestCase;
 
 use function array_filter;
+use function array_is_list;
 use function array_values;
 use function count;
 use function getenv;
+use function implode;
+use function in_array;
+use function is_array;
 use function is_string;
+use function ksort;
+use function sprintf;
 
 /**
  * The 20 conformance scenarios every adapter passes.
@@ -66,7 +74,7 @@ abstract class ConformanceTestCase extends TestCase
     protected const PNG_1X1 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg==';
 
     /** A public image for the URL source. */
-    protected const IMAGE_URL = 'https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png';
+    protected const IMAGE_URL = 'https://raw.githubusercontent.com/ldkafka/yii3-ai/main/tests/Conformance/media/test-image.png'; // our own asset: some hosts refuse Anthropic's fetcher
 
     /** A one-page PDF that says "Hello PDF". */
     protected const PDF_ONE_PAGE = 'JVBERi0xLjQKMSAwIG9iago8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFI+PgplbmRvYmoKMiAwIG9iago8PC9UeXBlL1BhZ2VzL0tpZHNbMyAwIFJdL0NvdW50IDE+PgplbmRvYmoKMyAwIG9iago8PC9UeXBlL1BhZ2UvUGFyZW50IDIgMCBSL01lZGlhQm94WzAgMCAyMDAgMjAwXS9Db250ZW50cyA0IDAgUi9SZXNvdXJjZXM8PC9Gb250PDwvRjE8PC9UeXBlL0ZvbnQvU3VidHlwZS9UeXBlMS9CYXNlRm9udC9IZWx2ZXRpY2E+Pj4+Pj4+PgplbmRvYmoKNCAwIG9iago8PC9MZW5ndGggNDA+PgpzdHJlYW0KQlQgL0YxIDI0IFRmIDIwIDEwMCBUZCAoSGVsbG8gUERGKSBUaiBFVAplbmRzdHJlYW0KZW5kb2JqCnhyZWYKMCA1CjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDAwOSAwMDAwMCBuIAowMDAwMDAwMDU0IDAwMDAwIG4gCjAwMDAwMDAxMDUgMDAwMDAgbiAKMDAwMDAwMDI1OCAwMDAwMCBuIAp0cmFpbGVyCjw8L1NpemUgNS9Sb290IDEgMCBSPj4Kc3RhcnR4cmVmCjM0NgolJUVPRgo=';
@@ -122,10 +130,18 @@ abstract class ConformanceTestCase extends TestCase
         $sent = $this->requests()[0];
         self::assertStringStartsWith('Bearer ', $sent->headers['authorization'] ?? '');
         self::assertArrayNotHasKey('x-api-key', $sent->headers);
-        if (!$this->live()) {
-            self::assertSame('Hello!', $response->text());
-            self::assertSame('claude-haiku-5-5', $response->model);
+        // The mapped values equal the body that was received (live) or replayed (offline).
+        $body = $this->responseBody(0);
+        $texts = [];
+        foreach (self::blocksOf(Json::array($body, 'content'), 'text') as $block) {
+            $texts[] = Json::string($block, 'text') ?? '';
         }
+        self::assertSame(implode('', $texts), $response->text());
+        self::assertSame(Json::string($body, 'model'), $response->model);
+        self::assertSame(Json::string($body, 'id'), $response->id);
+        $usage = Json::array($body, 'usage');
+        self::assertSame(Json::int($usage, 'input_tokens'), $response->usage->inputTokens);
+        self::assertSame(Json::int($usage, 'output_tokens'), $response->usage->outputTokens);
         $this->finish();
     }
 
@@ -272,9 +288,8 @@ abstract class ConformanceTestCase extends TestCase
             self::assertInstanceOf(ToolResult::class, $part);
             self::assertSame($call->id, $part->callId);
         }
-        if (!$this->live()) {
-            self::assertCount(2, $calls);
-        }
+        self::assertNotSame([], $calls);
+        self::assertCount(count(self::blocksOf(Json::array($this->responseBody(0), 'content'), 'tool_use')), $calls);
         $this->finish();
     }
 
@@ -313,9 +328,13 @@ abstract class ConformanceTestCase extends TestCase
         self::assertSame(StopReason::ToolUse, $response->stopReason);
         $call = $response->toolCalls()[0];
         self::assertSame('search', $call->name);
-        if (!$this->live()) {
-            self::assertSame('{"q":"x","opts":{}}', $call->argumentsJson);
-        }
+
+        // Sent: the replayed call keeps {} and nested {} exactly (the wire body, read back with objects kept).
+        $sent = self::blocksOf(self::contentOf($this->requestBody(0), 1), 'tool_use');
+        self::assertSame('{"q":"saved","filters":{},"options":{"nested":{}},"tags":[]}', Json::encode($sent[0]['input'] ?? null));
+        // Received: the call's JSON is the input the API sent, whatever the model chose to put in it.
+        $received = self::blocksOf(Json::array($this->responseBody(0), 'content'), 'tool_use');
+        self::assertSame(Json::encode($received[0]['input'] ?? null), $call->argumentsJson);
         $this->finish();
     }
 
@@ -329,17 +348,23 @@ abstract class ConformanceTestCase extends TestCase
             toolChoice: ToolChoice::auto(),
             maxTokens: 2048,
         ));
+        // Adaptive thinking: the model decides whether to think, so the answer may hold no thinking
+        // blocks (Haiku 5.5 did not for this prompt). Whatever blocks came back must map one to one
+        // and be echoed verbatim in the next request. Models with thinking always on (Opus 5.5,
+        // Fable 5.1) exercise the echo live; the mapper unit tests cover it with both block types.
         $thinking = array_values(array_filter($first->message->parts, static fn ($part): bool => $part instanceof Thinking));
-        foreach ($thinking as $part) {
+        $blocks = self::blocksOf(Json::array($this->responseBody(0), 'content'), 'thinking', 'redacted_thinking');
+        self::assertCount(count($blocks), $thinking);
+        foreach ($blocks as $index => $block) {
+            $part = $thinking[$index];
             self::assertInstanceOf(Thinking::class, $part);
             self::assertSame('anthropic', $part->provider);
-        }
-        if (!$this->live()) {
-            self::assertCount(2, $thinking);
-            self::assertInstanceOf(Thinking::class, $thinking[0]);
-            self::assertInstanceOf(Thinking::class, $thinking[1]);
-            self::assertSame('sig-abc123', $thinking[0]->opaque['signature'] ?? null);
-            self::assertSame('redacted-xyz789', $thinking[1]->opaque['data'] ?? null);
+            if (Json::string($block, 'type') === 'redacted_thinking') {
+                self::assertSame(Json::string($block, 'data'), $part->opaque['data'] ?? null);
+            } else {
+                self::assertSame(Json::string($block, 'thinking') ?? '', $part->text);
+                self::assertSame(Json::string($block, 'signature'), $part->opaque['signature'] ?? null);
+            }
         }
 
         $calls = $first->toolCalls();
@@ -354,36 +379,71 @@ abstract class ConformanceTestCase extends TestCase
                 maxTokens: 2048,
             ));
             self::assertSame(StopReason::Complete, $second->stopReason);
+            $echoed = self::blocksOf(self::contentOf($this->requestBody(1), 1), 'thinking', 'redacted_thinking');
+            self::assertSame(Json::encode(self::canonical($blocks)), Json::encode(self::canonical($echoed)));
         }
         $this->finish();
     }
 
+    /**
+     * Two calls on one long, fixed prefix: the first writes the prompt cache, the second reads it.
+     *
+     * The system prompt is about 5,000 tokens, well over the 512-token cache minimum of every
+     * Claude 5 model (shorter prompts are silently not cached). Live, the scenario costs about
+     * $0.001 on Haiku 5.5.
+     */
     public function testPromptCache(): void
     {
         $client = $this->begin('prompt_cache');
-        $response = $client->complete(new Request(
-            [Message::user('Summarise the policy in one sentence.')],
-            system: 'You are a support agent. Policy: guests may cancel up to 14 days before arrival for a full refund.',
+        $request = new Request(
+            [],
+            system: self::cachePrefix(),
             tools: [self::weatherSpec()],
-            maxTokens: 1024,
+            maxTokens: 256,
             cache: [
                 new CacheHint(CacheScope::Tools, 3600),
                 new CacheHint(CacheScope::System),
                 new CacheHint(CacheScope::Messages),
             ],
-        ));
+        );
+        $first = $client->complete($request->withMessages([Message::user('Which rule covers day 7? Answer with the rule number only.')]));
+        $second = $client->complete($request->withMessages([Message::user('Which rule covers day 12? Answer with the rule number only.')]));
 
-        self::assertSame(StopReason::Complete, $response->stopReason);
-        self::assertNotNull($response->cost);
-        if (!$this->live()) {
-            $usage = $response->usage;
-            self::assertSame(20, $usage->inputTokens);
-            self::assertSame(1800, $usage->cacheReadTokens);
-            self::assertSame(2400, $usage->cacheWriteTokens);
-            self::assertSame(['cacheWrite1h' => 2000], $usage->details);
-            // Haiku 5.5: 20 x 0.10 + 1800 x 0.01 + 400 x 0.125 + 2000 x 0.20 + 50 x 0.50, per million.
-            self::assertEqualsWithDelta(0.000495, $response->cost->total(), 1e-12);
-            self::assertEqualsWithDelta(0.00045, $response->cost->cacheWrite, 1e-12);
+        foreach ([$first, $second] as $index => $response) {
+            self::assertSame(StopReason::Complete, $response->stopReason);
+
+            // Sent: the three hints became cache_control at the documented places.
+            $sent = $this->requestBody($index);
+            self::assertSame(['type' => 'ephemeral'], $sent['cache_control'] ?? null);
+            $systemBlock = Json::array($sent, 'system')[0] ?? null;
+            self::assertIsArray($systemBlock);
+            self::assertSame(['type' => 'ephemeral'], $systemBlock['cache_control'] ?? null);
+            $tools = Json::array($sent, 'tools');
+            $lastTool = $tools[count($tools) - 1] ?? null;
+            self::assertIsArray($lastTool);
+            self::assertSame(['type' => 'ephemeral', 'ttl' => '1h'], $lastTool['cache_control'] ?? null);
+
+            // Received: the usage counters, the 1h split and the cost follow the body.
+            $usage = Json::array($this->responseBody($index), 'usage');
+            $creation = Json::array($usage, 'cache_creation');
+            $expected = new Usage(
+                Json::int($usage, 'input_tokens'),
+                Json::int($usage, 'output_tokens'),
+                Json::int($usage, 'cache_read_input_tokens'),
+                Json::int($usage, 'cache_creation_input_tokens'),
+                Json::int(Json::array($usage, 'output_tokens_details'), 'thinking_tokens'),
+                isset($creation['ephemeral_1h_input_tokens']) ? ['cacheWrite1h' => Json::int($creation, 'ephemeral_1h_input_tokens')] : [],
+            );
+            self::assertEquals($expected, $response->usage);
+            $price = $this->currentProfile()->price;
+            self::assertNotNull($price);
+            self::assertNotNull($response->cost);
+            self::assertEqualsWithDelta((new CostCalculator())->cost($expected, $price)->total(), $response->cost->total(), 1e-12);
+        }
+
+        if ($this->live() || ($this->fixture['synthetic'] ?? true) === false) {
+            self::assertGreaterThan(0, $first->usage->cacheWriteTokens, 'The first call writes the cache.');
+            self::assertGreaterThan(0, $second->usage->cacheReadTokens, 'The second call reads the same prefix.');
         }
         $this->finish();
     }
@@ -583,6 +643,117 @@ abstract class ConformanceTestCase extends TestCase
     protected function requests(): array
     {
         return $this->transport()->requests;
+    }
+
+    /**
+     * A fixed system prompt of about 5,000 tokens (70 numbered rules, about 13,000 characters),
+     * the same on every run.
+     */
+    protected static function cachePrefix(): string
+    {
+        $lines = ['You are a support agent for a holiday rental site. Answer from these house rules only.'];
+        for ($rule = 1; $rule <= 70; $rule++) {
+            $lines[] = sprintf(
+                'Rule %d: a booking whose arrival falls on day %d of the season may change its dates up to %d days before arrival, '
+                . 'pays a cleaning fee of %d dollars, and allows at most %d guests in the unit.',
+                $rule,
+                $rule,
+                ($rule % 14) + 1,
+                40 + ($rule % 9) * 5,
+                2 + ($rule % 6),
+            );
+        }
+
+        return implode("\n", $lines);
+    }
+
+    /**
+     * The profile the scenario runs on.
+     */
+    protected function currentProfile(): ModelProfile
+    {
+        return $this->live() ? $this->liveProfile() : $this->profile();
+    }
+
+    /**
+     * The decoded body of a response received (live) or replayed (offline), empty objects kept.
+     *
+     * @return array<mixed>
+     */
+    protected function responseBody(int $index): array
+    {
+        $responses = $this->transport()->responses;
+        self::assertArrayHasKey($index, $responses);
+        $decoded = Json::decodeKeepEmptyObjects($responses[$index]->body);
+        self::assertIsArray($decoded);
+
+        return $decoded;
+    }
+
+    /**
+     * The decoded body of a request sent, empty objects kept.
+     *
+     * @return array<mixed>
+     */
+    protected function requestBody(int $index): array
+    {
+        $requests = $this->requests();
+        self::assertArrayHasKey($index, $requests);
+        $decoded = Json::decodeKeepEmptyObjects($requests[$index]->body);
+        self::assertIsArray($decoded);
+
+        return $decoded;
+    }
+
+    /**
+     * The content blocks of message $index in a request body.
+     *
+     * @param array<mixed> $body
+     * @return array<mixed>
+     */
+    protected static function contentOf(array $body, int $index): array
+    {
+        $message = Json::array($body, 'messages')[$index] ?? null;
+        self::assertIsArray($message);
+
+        return Json::array($message, 'content');
+    }
+
+    /**
+     * The blocks of the given types, in order.
+     *
+     * @param array<mixed> $content
+     * @return list<array<mixed>>
+     */
+    protected static function blocksOf(array $content, string ...$types): array
+    {
+        $out = [];
+        foreach ($content as $block) {
+            if (is_array($block) && in_array(Json::string($block, 'type'), $types, true)) {
+                $out[] = $block;
+            }
+        }
+
+        return $out;
+    }
+
+    /**
+     * A value with object keys sorted, so key order does not matter in comparisons.
+     */
+    protected static function canonical(mixed $value): mixed
+    {
+        if (!is_array($value)) {
+            return $value;
+        }
+        $out = [];
+        foreach ($value as $key => $item) {
+            $out[$key] = self::canonical($item);
+        }
+        if (!array_is_list($out)) {
+            ksort($out);
+        }
+
+        return $out;
     }
 
     protected function live(): bool

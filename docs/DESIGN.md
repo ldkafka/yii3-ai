@@ -584,7 +584,7 @@ conversation state). v0.1 sends no `thinking` field, so every model runs adaptiv
 | `temperature` | `temperature` | sent as is; Claude 5 models accept only 1.0 and answer 400 otherwise |
 | `stop` | `stop_sequences` | |
 | `metadata['user_id']` | `metadata.user_id` | the only key Anthropic accepts; other keys are not sent |
-| `CacheHint` Tools / System / Messages | `cache_control: {type: ephemeral}` on the last tool / on the system block / at top level (automatic caching) | ttl null or 300 → the 5m default, 3600 → `"1h"`, other → ConfigurationException; a 1h hint after a 5m one in tools → system → messages order → ConfigurationException (the API wants longer TTLs first); at most 3 of the 4 breakpoints; prompts under 512 tokens are not cached (no error) |
+| `CacheHint` Tools / System / Messages | `cache_control: {type: ephemeral}` on the last tool / on the system block / at top level (automatic caching) | ttl null or 300 → the 5m default, 3600 → `"1h"`, other → ConfigurationException; a 1h hint after a 5m one in tools → system → messages order → ConfigurationException (the API wants longer TTLs first); at most 3 of the 4 breakpoints; prompts under the model's minimum are silently not cached, no error (512 tokens for every Claude 5 model in §7.1, per `prompt-caching.md`) |
 | model `options`, then `providerOptions['anthropic']` | merged into the body | maps merge recursively, lists are replaced |
 
 ### 7.3 Response mapping
@@ -788,6 +788,27 @@ API through `CurlTransport` (model `AI_LIVE_MODEL`, default `claude-haiku-5-5`; 
 equality is skipped, the structural checks stay, and scenarios whose fixture says `"live": false` are skipped (they
 cannot be triggered on demand: `refusal`, `unknown_block_preserved`, `error_retried`, `error_not_retried`). `AI_RECORD=1` adds a
 `RecordingTransport` that rewrites the fixtures. Live runs are local and manual, never in CI.
+
+**Assertions hold for any valid answer.** A scenario never compares against constants from a hand-written fixture.
+It checks structure, and it compares the mapped values with the response body the transport actually received (live)
+or replayed (offline), read back with empty and numeric-key objects kept as objects (`responseBody()`,
+`requestBody()`). Request-side fidelity (the `{}` and nested `{}` in scenario 12, the `cache_control` placement in 14)
+is read from the body that was sent, so it is checked live too. Exact edge values that a model may never produce
+(`{}` in a received tool input, thinking and redacted thinking, the 1h cache split) are pinned by mapper unit tests
+on documented shapes instead.
+
+**Thinking (scenario 13) is asserted when present.** v0.1 sends no `thinking` field, so the model decides whether to
+think; Haiku 5.5 did not for this prompt in the first live recording. Forcing it would need a `thinking` option this
+package has not verified per model (§7.1 lists different defaults per model), so the scenario asserts that every
+thinking block maps one to one and is echoed verbatim in the next request when there are any, and passes with
+none. To exercise the echo live, run it with `AI_LIVE_MODEL=claude-opus-5-5` or `claude-fable-5-1` (thinking always
+on).
+
+**Caching (scenario 14).** The first live recording sent a 418-token prompt, under the 512-token minimum, so it read
+and wrote nothing. The scenario now makes two calls on a fixed system prompt of about 5,000 tokens (generated in the
+test, 70 numbered rules) with different questions: the first must show a cache write and the second a cache read of
+the same prefix (checked live and on recorded fixtures; the hand-written fixture holds sample numbers until the next
+recording). About $0.001 per live run on Haiku 5.5.
 
 ## 13. CI and static analysis
 

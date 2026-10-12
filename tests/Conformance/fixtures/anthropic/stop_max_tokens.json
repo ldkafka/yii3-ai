@@ -2,8 +2,8 @@
     "scenario": "stop_max_tokens",
     "provider": "anthropic",
     "model": "claude-haiku-5-5",
-    "recordedAt": "2026-10-12T00:00:00Z",
-    "synthetic": true,
+    "recordedAt": "2026-10-12T16:41:36Z",
+    "synthetic": false,
     "exchanges": [
         {
             "request": {
@@ -33,28 +33,41 @@
             "response": {
                 "status": 200,
                 "headers": {
-                    "request-id": "req_011CSynthetic0004",
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "request-id": "req_011CfxgAATPk3Qd7g9HJA22J"
                 },
                 "body": {
-                    "id": "msg_01Synthetic0004",
+                    "model": "claude-haiku-5-5",
+                    "id": "msg_011CfxgAAnjRj9xzouR2gsUy",
                     "type": "message",
                     "role": "assistant",
-                    "model": "claude-haiku-5-5",
                     "content": [
                         {
-                            "type": "text",
-                            "text": "1, 2, 3"
+                            "type": "thinking",
+                            "thinking": "",
+                            "signature": "CAQS0wQKEAgSGAI4AUIIdGhpbmtpbmcSDANyCCiUa6MpuMHs0xoMDE0SI+rJPG0PJUwzIjCZZvVp/dtSAFYLVmvTe3U2uyrogd/204P8e8HGwx3SLs1y0nmZMRyQS1D+s6NakAkq8AMswMYoJSi0H0bLpbhP+zthxVebZRVMRTRq1Z/ngiA+rRNobZLjM4ziU9moXL+Yfp59wZrDt2jdIv7PFF4vyKhtyZ6sgvf41YN3QW2KloHzjS7KjQN5H5WS/C1UTd9GssZ+Gkrays8I08Px6cF3m7tSS3A08716n9huEcFCP0Mec7D4U2jzugeqR8AvhIaOtEivH+269wdyRatYrV67JCCpQjXtakYKxijG5W/0VpgDrKUsvOt08hKOwmiBeYCqQYLudnKAs2On/LMTb/xeW2W9KOkSbhdCd/ydi+rCWVlbEJSO6QAayY2k3/I1pS2tyioRsEuaDaJDqRQ1DO4kDVJDOMcSebihbd5JG0UulPSOL7Nf0jdEvNqZ7UvnssQmFhgsexrsfBSKAKV89DrenY15fTsbTSkjktf7wfU2OBvdeAXNDklv+YQVnwVqO50bzJGEFvasU3lVYtn44qBtSt+iFOMqLJolStW0djVWDQbCKmGWwoD1CZrob5QKyJFOpWg/ecfsqoBA/mRzL/vfgiRvD+HPGe+LKK0Q2AuYvIvSL6pWOUx6/cfboboAwV0FscebRmKquPIPbXlh3/dFNV0E5CTMIRVJ3I98K9h4kD0sIvy3X8JzSSupoKs+qP9zQUJQaDBWL7ICcJ687vLkKGZJGAE="
                         }
                     ],
+                    "container": null,
                     "stop_reason": "max_tokens",
                     "stop_sequence": null,
+                    "stop_details": null,
                     "usage": {
-                        "input_tokens": 25,
-                        "output_tokens": 12,
+                        "input_tokens": 24,
                         "cache_creation_input_tokens": 0,
-                        "cache_read_input_tokens": 0
-                    }
+                        "cache_read_input_tokens": 0,
+                        "cache_creation": {
+                            "ephemeral_5m_input_tokens": 0,
+                            "ephemeral_1h_input_tokens": 0
+                        },
+                        "output_tokens": 5,
+                        "output_tokens_details": {
+                            "thinking_tokens": 5
+                        },
+                        "service_tier": "standard",
+                        "inference_geo": "global"
+                    },
+                    "diagnostics": null
                 }
             }
         }

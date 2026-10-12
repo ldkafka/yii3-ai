@@ -286,9 +286,17 @@ AI_LIVE=1 ANTHROPIC_API_KEY=... vendor/bin/phpunit --testsuite conformance
 AI_LIVE=1 AI_RECORD=1 ANTHROPIC_API_KEY=... vendor/bin/phpunit --testsuite conformance   # rewrite the fixtures
 ```
 
-`AI_LIVE_MODEL` picks the model (default `claude-haiku-5-5`). Scenarios that cannot be triggered on
-demand (errors, refusals, server tools) are skipped in live runs. Recorded fixtures keep only
-allow-listed headers and never the key. Live runs are manual, never in CI.
+`AI_LIVE_MODEL` picks the model (default `claude-haiku-5-5`). With a key that is not scoped to one
+workspace, also set `ANTHROPIC_WORKSPACE_ID` (the `wrkspc_` id from the Console). Scenarios that cannot
+be triggered on demand (errors, refusals, server tools) are skipped in live runs. The thinking scenario
+checks the thinking round trip only when the model thinks; run it with `AI_LIVE_MODEL=claude-opus-5-5`
+(thinking always on) to exercise it live. Recorded fixtures keep
+only allow-listed headers and never the key or the workspace id. Live runs are manual, never in CI.
+
+On Windows, PHP ships without a CA bundle, so curl fails with "SSL certificate problem: unable to get
+local issuer certificate" (curl 60). Set `curl.cainfo` in `php.ini` to a CA bundle, for example the
+one Git for Windows installs (`C:/Program Files/Git/mingw64/etc/ssl/certs/ca-bundle.crt`), or pass it
+once with `php -d curl.cainfo=...`. The transport never turns certificate checks off.
 
 ## License
 

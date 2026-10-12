@@ -313,4 +313,29 @@ final class AnthropicMapperTest extends TestCase
         self::assertSame(ToolChoiceMode::Auto, ToolChoice::auto()->mode);
         self::assertSame(ToolChoiceMode::None, ToolChoice::none()->mode);
     }
+
+    public function testThinkingAndToolInputAreEchoedVerbatim(): void
+    {
+        $content = '[{"type":"thinking","thinking":"Check the tool.","signature":"sig-1"},'
+            . '{"type":"redacted_thinking","data":"enc-2"},'
+            . '{"type":"tool_use","id":"toolu_1","name":"search","input":{"q":"x","opts":{},"pick":{"0":"a","1":"b"},"tags":[]}}]';
+        $response = $this->mapper->toResponse('{"content":' . $content . ',"stop_reason":"tool_use","usage":{}}', $this->model());
+
+        self::assertSame('{"q":"x","opts":{},"pick":{"0":"a","1":"b"},"tags":[]}', $response->toolCalls()[0]->argumentsJson);
+        $payload = $this->mapper->toPayload(new Request([Message::user('x'), $response->message]), $this->model());
+        $assistant = Json::array($payload, 'messages')[1] ?? null;
+        self::assertIsArray($assistant);
+        self::assertSame($content, Json::encode($assistant['content'] ?? null));
+    }
+
+    public function testCacheUsageWithTheOneHourSplit(): void
+    {
+        $response = $this->mapper->toResponse(
+            '{"content":[],"stop_reason":"end_turn","usage":{"input_tokens":20,"cache_read_input_tokens":1800,'
+            . '"cache_creation_input_tokens":2400,"cache_creation":{"ephemeral_5m_input_tokens":400,"ephemeral_1h_input_tokens":2000},"output_tokens":50}}',
+            $this->model(),
+        );
+
+        self::assertEquals(new \Ldkafka\Ai\Usage(20, 50, 1800, 2400, 0, ['cacheWrite1h' => 2000]), $response->usage);
+    }
 }

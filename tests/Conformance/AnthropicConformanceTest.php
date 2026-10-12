@@ -18,15 +18,23 @@ use function is_string;
  * The conformance scenarios against the Anthropic adapter.
  *
  * Live: `AI_LIVE=1 ANTHROPIC_API_KEY=... vendor/bin/phpunit --testsuite conformance`
- * (model `AI_LIVE_MODEL`, default claude-haiku-5-5); add `AI_RECORD=1` to rewrite the fixtures.
+ * (model `AI_LIVE_MODEL`, default claude-haiku-5-5; `ANTHROPIC_WORKSPACE_ID` for a key that is not
+ * scoped to one workspace); add `AI_RECORD=1` to rewrite the fixtures.
  */
 final class AnthropicConformanceTest extends ConformanceTestCase
 {
     protected function provider(TransportInterface $transport): ProviderInterface
     {
-        $key = $this->live() ? (string) getenv('ANTHROPIC_API_KEY') : self::FAKE_KEY;
+        if (!$this->live()) {
+            return new AnthropicProvider(self::FAKE_KEY, $transport);
+        }
+        $workspace = getenv('ANTHROPIC_WORKSPACE_ID');
 
-        return new AnthropicProvider($key, $transport);
+        return new AnthropicProvider(
+            (string) getenv('ANTHROPIC_API_KEY'),
+            $transport,
+            workspaceId: is_string($workspace) && $workspace !== '' ? $workspace : null,
+        );
     }
 
     protected function profile(): ModelProfile

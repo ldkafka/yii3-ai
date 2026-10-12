@@ -2,8 +2,8 @@
     "scenario": "system_prompt",
     "provider": "anthropic",
     "model": "claude-haiku-5-5",
-    "recordedAt": "2026-10-12T00:00:00Z",
-    "synthetic": true,
+    "recordedAt": "2026-10-12T16:41:34Z",
+    "synthetic": false,
     "exchanges": [
         {
             "request": {
@@ -17,6 +17,7 @@
                 "body": {
                     "model": "claude-haiku-5-5",
                     "max_tokens": 1024,
+                    "system": "You answer in French, in one short sentence.",
                     "messages": [
                         {
                             "role": "user",
@@ -27,35 +28,46 @@
                                 }
                             ]
                         }
-                    ],
-                    "system": "You answer in French, in one short sentence."
+                    ]
                 }
             },
             "response": {
                 "status": 200,
                 "headers": {
-                    "request-id": "req_011CSynthetic0002",
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "request-id": "req_011Cfxg9yFDE5NXXeiS61phV"
                 },
                 "body": {
-                    "id": "msg_01Synthetic0002",
+                    "model": "claude-haiku-5-5",
+                    "id": "msg_011Cfxg9yc35Zpwd8TLizu7C",
                     "type": "message",
                     "role": "assistant",
-                    "model": "claude-haiku-5-5",
                     "content": [
                         {
                             "type": "text",
                             "text": "Merci beaucoup !"
                         }
                     ],
+                    "container": null,
                     "stop_reason": "end_turn",
                     "stop_sequence": null,
+                    "stop_details": null,
                     "usage": {
-                        "input_tokens": 25,
-                        "output_tokens": 12,
+                        "input_tokens": 28,
                         "cache_creation_input_tokens": 0,
-                        "cache_read_input_tokens": 0
-                    }
+                        "cache_read_input_tokens": 0,
+                        "cache_creation": {
+                            "ephemeral_5m_input_tokens": 0,
+                            "ephemeral_1h_input_tokens": 0
+                        },
+                        "output_tokens": 11,
+                        "output_tokens_details": {
+                            "thinking_tokens": 0
+                        },
+                        "service_tier": "standard",
+                        "inference_geo": "global"
+                    },
+                    "diagnostics": null
                 }
             }
         }

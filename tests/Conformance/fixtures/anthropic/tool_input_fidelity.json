@@ -2,8 +2,8 @@
     "scenario": "tool_input_fidelity",
     "provider": "anthropic",
     "model": "claude-haiku-5-5",
-    "recordedAt": "2026-10-12T00:00:00Z",
-    "synthetic": true,
+    "recordedAt": "2026-10-12T16:41:49Z",
+    "synthetic": false,
     "exchanges": [
         {
             "request": {
@@ -88,33 +88,47 @@
             "response": {
                 "status": 200,
                 "headers": {
-                    "request-id": "req_011CSynthetic0015",
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "request-id": "req_011CfxgB7oBrBpumojKCt2Te"
                 },
                 "body": {
-                    "id": "msg_01Synthetic0015",
+                    "model": "claude-haiku-5-5",
+                    "id": "msg_011CfxgB89XBkQdiXjPgZQqA",
                     "type": "message",
                     "role": "assistant",
-                    "model": "claude-haiku-5-5",
                     "content": [
                         {
                             "type": "tool_use",
-                            "id": "toolu_01F2",
+                            "id": "toolu_01F7T3oPXgz7DQcAn9Vaha4s",
                             "name": "search",
                             "input": {
-                                "q": "x",
-                                "opts": {}
+                                "q": "x"
+                            },
+                            "caller": {
+                                "type": "direct"
                             }
                         }
                     ],
+                    "container": null,
                     "stop_reason": "tool_use",
                     "stop_sequence": null,
+                    "stop_details": null,
                     "usage": {
-                        "input_tokens": 25,
-                        "output_tokens": 12,
+                        "input_tokens": 650,
                         "cache_creation_input_tokens": 0,
-                        "cache_read_input_tokens": 0
-                    }
+                        "cache_read_input_tokens": 0,
+                        "cache_creation": {
+                            "ephemeral_5m_input_tokens": 0,
+                            "ephemeral_1h_input_tokens": 0
+                        },
+                        "output_tokens": 32,
+                        "output_tokens_details": {
+                            "thinking_tokens": 0
+                        },
+                        "service_tier": "standard",
+                        "inference_geo": "global"
+                    },
+                    "diagnostics": null
                 }
             }
         }

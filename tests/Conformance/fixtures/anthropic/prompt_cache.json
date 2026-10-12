@@ -16,25 +16,25 @@
                 },
                 "body": {
                     "model": "claude-haiku-5-5",
-                    "max_tokens": 1024,
+                    "max_tokens": 256,
+                    "system": [
+                        {
+                            "type": "text",
+                            "text": "You are a support agent for a holiday rental site. Answer from these house rules only.\nRule 1: a booking whose arrival falls on day 1 of the season may change its dates up to 2 days before arrival, pays a cleaning fee of 45 dollars, and allows at most 3 guests in the unit.\nRule 2: a booking whose arrival falls on day 2 of the season may change its dates up to 3 days before arrival, pays a cleaning fee of 50 dollars, and allows at most 4 guests in the unit.\nRule 3: a booking whose arrival falls on day 3 of the season may change its dates up to 4 days before arrival, pays a cleaning fee of 55 dollars, and allows at most 5 guests in the unit.\nRule 4: a booking whose arrival falls on day 4 of the season may change its dates up to 5 days before arrival, pays a cleaning fee of 60 dollars, and allows at most 6 guests in the unit.\nRule 5: a booking whose arrival falls on day 5 of the season may change its dates up to 6 days before arrival, pays a cleaning fee of 65 dollars, and allows at most 7 guests in the unit.\nRule 6: a booking whose arrival falls on day 6 of the season may change its dates up to 7 days before arrival, pays a cleaning fee of 70 dollars, and allows at most 2 guests in the unit.\nRule 7: a booking whose arrival falls on day 7 of the season may change its dates up to 8 days before arrival, pays a cleaning fee of 75 dollars, and allows at most 3 guests in the unit.\nRule 8: a booking whose arrival falls on day 8 of the season may change its dates up to 9 days before arrival, pays a cleaning fee of 80 dollars, and allows at most 4 guests in the unit.\nRule 9: a booking whose arrival falls on day 9 of the season may change its dates up to 10 days before arrival, pays a cleaning fee of 40 dollars, and allows at most 5 guests in the unit.\nRule 10: a booking whose arrival falls on day 10 of the season may change its dates up to 11 days before arrival, pays a cleaning fee of 45 dollars, and allows at most 6 guests in the unit.\nRule 11: a booking whose arrival falls on day 11 of the season may change its dates up to 12 days before arrival, pays a cleaning fee of 50 dollars, and allows at most 7 guests in the unit.\nRule 12: a booking whose arrival falls on day 12 of the season may change its dates up to 13 days before arrival, pays a cleaning fee of 55 dollars, and allows at most 2 guests in the unit.\nRule 13: a booking whose arrival falls on day 13 of the season may change its dates up to 14 days before arrival, pays a cleaning fee of 60 dollars, and allows at most 3 guests in the unit.\nRule 14: a booking whose arrival falls on day 14 of the season may change its dates up to 1 days before arrival, pays a cleaning fee of 65 dollars, and allows at most 4 guests in the unit.\nRule 15: a booking whose arrival falls on day 15 of the season may change its dates up to 2 days before arrival, pays a cleaning fee of 70 dollars, and allows at most 5 guests in the unit.\nRule 16: a booking whose arrival falls on day 16 of the season may change its dates up to 3 days before arrival, pays a cleaning fee of 75 dollars, and allows at most 6 guests in the unit.\nRule 17: a booking whose arrival falls on day 17 of the season may change its dates up to 4 days before arrival, pays a cleaning fee of 80 dollars, and allows at most 7 guests in the unit.\nRule 18: a booking whose arrival falls on day 18 of the season may change its dates up to 5 days before arrival, pays a cleaning fee of 40 dollars, and allows at most 2 guests in the unit.\nRule 19: a booking whose arrival falls on day 19 of the season may change its dates up to 6 days before arrival, pays a cleaning fee of 45 dollars, and allows at most 3 guests in the unit.\nRule 20: a booking whose arrival falls on day 20 of the season may change its dates up to 7 days before arrival, pays a cleaning fee of 50 dollars, and allows at most 4 guests in the unit.\nRule 21: a booking whose arrival falls on day 21 of the season may change its dates up to 8 days before arrival, pays a cleaning fee of 55 dollars, and allows at most 5 guests in the unit.\nRule 22: a booking whose arrival falls on day 22 of the season may change its dates up to 9 days before arrival, pays a cleaning fee of 60 dollars, and allows at most 6 guests in the unit.\nRule 23: a booking whose arrival falls on day 23 of the season may change its dates up to 10 days before arrival, pays a cleaning fee of 65 dollars, and allows at most 7 guests in the unit.\nRule 24: a booking whose arrival falls on day 24 of the season may change its dates up to 11 days before arrival, pays a cleaning fee of 70 dollars, and allows at most 2 guests in the unit.\nRule 25: a booking whose arrival falls on day 25 of the season may change its dates up to 12 days before arrival, pays a cleaning fee of 75 dollars, and allows at most 3 guests in the unit.\nRule 26: a booking whose arrival falls on day 26 of the season may change its dates up to 13 days before arrival, pays a cleaning fee of 80 dollars, and allows at most 4 guests in the unit.\nRule 27: a booking whose arrival falls on day 27 of the season may change its dates up to 14 days before arrival, pays a cleaning fee of 40 dollars, and allows at most 5 guests in the unit.\nRule 28: a booking whose arrival falls on day 28 of the season may change its dates up to 1 days before arrival, pays a cleaning fee of 45 dollars, and allows at most 6 guests in the unit.\nRule 29: a booking whose arrival falls on day 29 of the season may change its dates up to 2 days before arrival, pays a cleaning fee of 50 dollars, and allows at most 7 guests in the unit.\nRule 30: a booking whose arrival falls on day 30 of the season may change its dates up to 3 days before arrival, pays a cleaning fee of 55 dollars, and allows at most 2 guests in the unit.\nRule 31: a booking whose arrival falls on day 31 of the season may change its dates up to 4 days before arrival, pays a cleaning fee of 60 dollars, and allows at most 3 guests in the unit.\nRule 32: a booking whose arrival falls on day 32 of the season may change its dates up to 5 days before arrival, pays a cleaning fee of 65 dollars, and allows at most 4 guests in the unit.\nRule 33: a booking whose arrival falls on day 33 of the season may change its dates up to 6 days before arrival, pays a cleaning fee of 70 dollars, and allows at most 5 guests in the unit.\nRule 34: a booking whose arrival falls on day 34 of the season may change its dates up to 7 days before arrival, pays a cleaning fee of 75 dollars, and allows at most 6 guests in the unit.\nRule 35: a booking whose arrival falls on day 35 of the season may change its dates up to 8 days before arrival, pays a cleaning fee of 80 dollars, and allows at most 7 guests in the unit.\nRule 36: a booking whose arrival falls on day 36 of the season may change its dates up to 9 days before arrival, pays a cleaning fee of 40 dollars, and allows at most 2 guests in the unit.\nRule 37: a booking whose arrival falls on day 37 of the season may change its dates up to 10 days before arrival, pays a cleaning fee of 45 dollars, and allows at most 3 guests in the unit.\nRule 38: a booking whose arrival falls on day 38 of the season may change its dates up to 11 days before arrival, pays a cleaning fee of 50 dollars, and allows at most 4 guests in the unit.\nRule 39: a booking whose arrival falls on day 39 of the season may change its dates up to 12 days before arrival, pays a cleaning fee of 55 dollars, and allows at most 5 guests in the unit.\nRule 40: a booking whose arrival falls on day 40 of the season may change its dates up to 13 days before arrival, pays a cleaning fee of 60 dollars, and allows at most 6 guests in the unit.\nRule 41: a booking whose arrival falls on day 41 of the season may change its dates up to 14 days before arrival, pays a cleaning fee of 65 dollars, and allows at most 7 guests in the unit.\nRule 42: a booking whose arrival falls on day 42 of the season may change its dates up to 1 days before arrival, pays a cleaning fee of 70 dollars, and allows at most 2 guests in the unit.\nRule 43: a booking whose arrival falls on day 43 of the season may change its dates up to 2 days before arrival, pays a cleaning fee of 75 dollars, and allows at most 3 guests in the unit.\nRule 44: a booking whose arrival falls on day 44 of the season may change its dates up to 3 days before arrival, pays a cleaning fee of 80 dollars, and allows at most 4 guests in the unit.\nRule 45: a booking whose arrival falls on day 45 of the season may change its dates up to 4 days before arrival, pays a cleaning fee of 40 dollars, and allows at most 5 guests in the unit.\nRule 46: a booking whose arrival falls on day 46 of the season may change its dates up to 5 days before arrival, pays a cleaning fee of 45 dollars, and allows at most 6 guests in the unit.\nRule 47: a booking whose arrival falls on day 47 of the season may change its dates up to 6 days before arrival, pays a cleaning fee of 50 dollars, and allows at most 7 guests in the unit.\nRule 48: a booking whose arrival falls on day 48 of the season may change its dates up to 7 days before arrival, pays a cleaning fee of 55 dollars, and allows at most 2 guests in the unit.\nRule 49: a booking whose arrival falls on day 49 of the season may change its dates up to 8 days before arrival, pays a cleaning fee of 60 dollars, and allows at most 3 guests in the unit.\nRule 50: a booking whose arrival falls on day 50 of the season may change its dates up to 9 days before arrival, pays a cleaning fee of 65 dollars, and allows at most 4 guests in the unit.\nRule 51: a booking whose arrival falls on day 51 of the season may change its dates up to 10 days before arrival, pays a cleaning fee of 70 dollars, and allows at most 5 guests in the unit.\nRule 52: a booking whose arrival falls on day 52 of the season may change its dates up to 11 days before arrival, pays a cleaning fee of 75 dollars, and allows at most 6 guests in the unit.\nRule 53: a booking whose arrival falls on day 53 of the season may change its dates up to 12 days before arrival, pays a cleaning fee of 80 dollars, and allows at most 7 guests in the unit.\nRule 54: a booking whose arrival falls on day 54 of the season may change its dates up to 13 days before arrival, pays a cleaning fee of 40 dollars, and allows at most 2 guests in the unit.\nRule 55: a booking whose arrival falls on day 55 of the season may change its dates up to 14 days before arrival, pays a cleaning fee of 45 dollars, and allows at most 3 guests in the unit.\nRule 56: a booking whose arrival falls on day 56 of the season may change its dates up to 1 days before arrival, pays a cleaning fee of 50 dollars, and allows at most 4 guests in the unit.\nRule 57: a booking whose arrival falls on day 57 of the season may change its dates up to 2 days before arrival, pays a cleaning fee of 55 dollars, and allows at most 5 guests in the unit.\nRule 58: a booking whose arrival falls on day 58 of the season may change its dates up to 3 days before arrival, pays a cleaning fee of 60 dollars, and allows at most 6 guests in the unit.\nRule 59: a booking whose arrival falls on day 59 of the season may change its dates up to 4 days before arrival, pays a cleaning fee of 65 dollars, and allows at most 7 guests in the unit.\nRule 60: a booking whose arrival falls on day 60 of the season may change its dates up to 5 days before arrival, pays a cleaning fee of 70 dollars, and allows at most 2 guests in the unit.\nRule 61: a booking whose arrival falls on day 61 of the season may change its dates up to 6 days before arrival, pays a cleaning fee of 75 dollars, and allows at most 3 guests in the unit.\nRule 62: a booking whose arrival falls on day 62 of the season may change its dates up to 7 days before arrival, pays a cleaning fee of 80 dollars, and allows at most 4 guests in the unit.\nRule 63: a booking whose arrival falls on day 63 of the season may change its dates up to 8 days before arrival, pays a cleaning fee of 40 dollars, and allows at most 5 guests in the unit.\nRule 64: a booking whose arrival falls on day 64 of the season may change its dates up to 9 days before arrival, pays a cleaning fee of 45 dollars, and allows at most 6 guests in the unit.\nRule 65: a booking whose arrival falls on day 65 of the season may change its dates up to 10 days before arrival, pays a cleaning fee of 50 dollars, and allows at most 7 guests in the unit.\nRule 66: a booking whose arrival falls on day 66 of the season may change its dates up to 11 days before arrival, pays a cleaning fee of 55 dollars, and allows at most 2 guests in the unit.\nRule 67: a booking whose arrival falls on day 67 of the season may change its dates up to 12 days before arrival, pays a cleaning fee of 60 dollars, and allows at most 3 guests in the unit.\nRule 68: a booking whose arrival falls on day 68 of the season may change its dates up to 13 days before arrival, pays a cleaning fee of 65 dollars, and allows at most 4 guests in the unit.\nRule 69: a booking whose arrival falls on day 69 of the season may change its dates up to 14 days before arrival, pays a cleaning fee of 70 dollars, and allows at most 5 guests in the unit.\nRule 70: a booking whose arrival falls on day 70 of the season may change its dates up to 1 days before arrival, pays a cleaning fee of 75 dollars, and allows at most 6 guests in the unit.",
+                            "cache_control": {
+                                "type": "ephemeral"
+                            }
+                        }
+                    ],
                     "messages": [
                         {
                             "role": "user",
                             "content": [
                                 {
                                     "type": "text",
-                                    "text": "Summarise the policy in one sentence."
+                                    "text": "Which rule covers day 7? Answer with the rule number only."
                                 }
                             ]
-                        }
-                    ],
-                    "system": [
-                        {
-                            "type": "text",
-                            "text": "You are a support agent. Policy: guests may cancel up to 14 days before arrival for a full refund.",
-                            "cache_control": {
-                                "type": "ephemeral"
-                            }
                         }
                     ],
                     "tools": [
@@ -67,31 +67,122 @@
             "response": {
                 "status": 200,
                 "headers": {
-                    "request-id": "req_011CSynthetic0018",
+                    "request-id": "req_011CSyntheticCache1",
                     "content-type": "application/json"
                 },
                 "body": {
-                    "id": "msg_01Synthetic0018",
+                    "id": "msg_01SyntheticCache1",
                     "type": "message",
                     "role": "assistant",
                     "model": "claude-haiku-5-5",
                     "content": [
                         {
                             "type": "text",
-                            "text": "Guests get a full refund if they cancel at least 14 days before arrival."
+                            "text": "Rule 7."
                         }
                     ],
                     "stop_reason": "end_turn",
                     "stop_sequence": null,
                     "usage": {
-                        "input_tokens": 20,
-                        "cache_read_input_tokens": 1800,
-                        "cache_creation_input_tokens": 2400,
+                        "input_tokens": 12,
+                        "cache_creation_input_tokens": 5140,
+                        "cache_read_input_tokens": 0,
                         "cache_creation": {
-                            "ephemeral_5m_input_tokens": 400,
-                            "ephemeral_1h_input_tokens": 2000
+                            "ephemeral_5m_input_tokens": 5020,
+                            "ephemeral_1h_input_tokens": 120
                         },
-                        "output_tokens": 50
+                        "output_tokens": 5
+                    }
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/messages",
+                "headers": {
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                "body": {
+                    "model": "claude-haiku-5-5",
+                    "max_tokens": 256,
+                    "system": [
+                        {
+                            "type": "text",
+                            "text": "You are a support agent for a holiday rental site. Answer from these house rules only.\nRule 1: a booking whose arrival falls on day 1 of the season may change its dates up to 2 days before arrival, pays a cleaning fee of 45 dollars, and allows at most 3 guests in the unit.\nRule 2: a booking whose arrival falls on day 2 of the season may change its dates up to 3 days before arrival, pays a cleaning fee of 50 dollars, and allows at most 4 guests in the unit.\nRule 3: a booking whose arrival falls on day 3 of the season may change its dates up to 4 days before arrival, pays a cleaning fee of 55 dollars, and allows at most 5 guests in the unit.\nRule 4: a booking whose arrival falls on day 4 of the season may change its dates up to 5 days before arrival, pays a cleaning fee of 60 dollars, and allows at most 6 guests in the unit.\nRule 5: a booking whose arrival falls on day 5 of the season may change its dates up to 6 days before arrival, pays a cleaning fee of 65 dollars, and allows at most 7 guests in the unit.\nRule 6: a booking whose arrival falls on day 6 of the season may change its dates up to 7 days before arrival, pays a cleaning fee of 70 dollars, and allows at most 2 guests in the unit.\nRule 7: a booking whose arrival falls on day 7 of the season may change its dates up to 8 days before arrival, pays a cleaning fee of 75 dollars, and allows at most 3 guests in the unit.\nRule 8: a booking whose arrival falls on day 8 of the season may change its dates up to 9 days before arrival, pays a cleaning fee of 80 dollars, and allows at most 4 guests in the unit.\nRule 9: a booking whose arrival falls on day 9 of the season may change its dates up to 10 days before arrival, pays a cleaning fee of 40 dollars, and allows at most 5 guests in the unit.\nRule 10: a booking whose arrival falls on day 10 of the season may change its dates up to 11 days before arrival, pays a cleaning fee of 45 dollars, and allows at most 6 guests in the unit.\nRule 11: a booking whose arrival falls on day 11 of the season may change its dates up to 12 days before arrival, pays a cleaning fee of 50 dollars, and allows at most 7 guests in the unit.\nRule 12: a booking whose arrival falls on day 12 of the season may change its dates up to 13 days before arrival, pays a cleaning fee of 55 dollars, and allows at most 2 guests in the unit.\nRule 13: a booking whose arrival falls on day 13 of the season may change its dates up to 14 days before arrival, pays a cleaning fee of 60 dollars, and allows at most 3 guests in the unit.\nRule 14: a booking whose arrival falls on day 14 of the season may change its dates up to 1 days before arrival, pays a cleaning fee of 65 dollars, and allows at most 4 guests in the unit.\nRule 15: a booking whose arrival falls on day 15 of the season may change its dates up to 2 days before arrival, pays a cleaning fee of 70 dollars, and allows at most 5 guests in the unit.\nRule 16: a booking whose arrival falls on day 16 of the season may change its dates up to 3 days before arrival, pays a cleaning fee of 75 dollars, and allows at most 6 guests in the unit.\nRule 17: a booking whose arrival falls on day 17 of the season may change its dates up to 4 days before arrival, pays a cleaning fee of 80 dollars, and allows at most 7 guests in the unit.\nRule 18: a booking whose arrival falls on day 18 of the season may change its dates up to 5 days before arrival, pays a cleaning fee of 40 dollars, and allows at most 2 guests in the unit.\nRule 19: a booking whose arrival falls on day 19 of the season may change its dates up to 6 days before arrival, pays a cleaning fee of 45 dollars, and allows at most 3 guests in the unit.\nRule 20: a booking whose arrival falls on day 20 of the season may change its dates up to 7 days before arrival, pays a cleaning fee of 50 dollars, and allows at most 4 guests in the unit.\nRule 21: a booking whose arrival falls on day 21 of the season may change its dates up to 8 days before arrival, pays a cleaning fee of 55 dollars, and allows at most 5 guests in the unit.\nRule 22: a booking whose arrival falls on day 22 of the season may change its dates up to 9 days before arrival, pays a cleaning fee of 60 dollars, and allows at most 6 guests in the unit.\nRule 23: a booking whose arrival falls on day 23 of the season may change its dates up to 10 days before arrival, pays a cleaning fee of 65 dollars, and allows at most 7 guests in the unit.\nRule 24: a booking whose arrival falls on day 24 of the season may change its dates up to 11 days before arrival, pays a cleaning fee of 70 dollars, and allows at most 2 guests in the unit.\nRule 25: a booking whose arrival falls on day 25 of the season may change its dates up to 12 days before arrival, pays a cleaning fee of 75 dollars, and allows at most 3 guests in the unit.\nRule 26: a booking whose arrival falls on day 26 of the season may change its dates up to 13 days before arrival, pays a cleaning fee of 80 dollars, and allows at most 4 guests in the unit.\nRule 27: a booking whose arrival falls on day 27 of the season may change its dates up to 14 days before arrival, pays a cleaning fee of 40 dollars, and allows at most 5 guests in the unit.\nRule 28: a booking whose arrival falls on day 28 of the season may change its dates up to 1 days before arrival, pays a cleaning fee of 45 dollars, and allows at most 6 guests in the unit.\nRule 29: a booking whose arrival falls on day 29 of the season may change its dates up to 2 days before arrival, pays a cleaning fee of 50 dollars, and allows at most 7 guests in the unit.\nRule 30: a booking whose arrival falls on day 30 of the season may change its dates up to 3 days before arrival, pays a cleaning fee of 55 dollars, and allows at most 2 guests in the unit.\nRule 31: a booking whose arrival falls on day 31 of the season may change its dates up to 4 days before arrival, pays a cleaning fee of 60 dollars, and allows at most 3 guests in the unit.\nRule 32: a booking whose arrival falls on day 32 of the season may change its dates up to 5 days before arrival, pays a cleaning fee of 65 dollars, and allows at most 4 guests in the unit.\nRule 33: a booking whose arrival falls on day 33 of the season may change its dates up to 6 days before arrival, pays a cleaning fee of 70 dollars, and allows at most 5 guests in the unit.\nRule 34: a booking whose arrival falls on day 34 of the season may change its dates up to 7 days before arrival, pays a cleaning fee of 75 dollars, and allows at most 6 guests in the unit.\nRule 35: a booking whose arrival falls on day 35 of the season may change its dates up to 8 days before arrival, pays a cleaning fee of 80 dollars, and allows at most 7 guests in the unit.\nRule 36: a booking whose arrival falls on day 36 of the season may change its dates up to 9 days before arrival, pays a cleaning fee of 40 dollars, and allows at most 2 guests in the unit.\nRule 37: a booking whose arrival falls on day 37 of the season may change its dates up to 10 days before arrival, pays a cleaning fee of 45 dollars, and allows at most 3 guests in the unit.\nRule 38: a booking whose arrival falls on day 38 of the season may change its dates up to 11 days before arrival, pays a cleaning fee of 50 dollars, and allows at most 4 guests in the unit.\nRule 39: a booking whose arrival falls on day 39 of the season may change its dates up to 12 days before arrival, pays a cleaning fee of 55 dollars, and allows at most 5 guests in the unit.\nRule 40: a booking whose arrival falls on day 40 of the season may change its dates up to 13 days before arrival, pays a cleaning fee of 60 dollars, and allows at most 6 guests in the unit.\nRule 41: a booking whose arrival falls on day 41 of the season may change its dates up to 14 days before arrival, pays a cleaning fee of 65 dollars, and allows at most 7 guests in the unit.\nRule 42: a booking whose arrival falls on day 42 of the season may change its dates up to 1 days before arrival, pays a cleaning fee of 70 dollars, and allows at most 2 guests in the unit.\nRule 43: a booking whose arrival falls on day 43 of the season may change its dates up to 2 days before arrival, pays a cleaning fee of 75 dollars, and allows at most 3 guests in the unit.\nRule 44: a booking whose arrival falls on day 44 of the season may change its dates up to 3 days before arrival, pays a cleaning fee of 80 dollars, and allows at most 4 guests in the unit.\nRule 45: a booking whose arrival falls on day 45 of the season may change its dates up to 4 days before arrival, pays a cleaning fee of 40 dollars, and allows at most 5 guests in the unit.\nRule 46: a booking whose arrival falls on day 46 of the season may change its dates up to 5 days before arrival, pays a cleaning fee of 45 dollars, and allows at most 6 guests in the unit.\nRule 47: a booking whose arrival falls on day 47 of the season may change its dates up to 6 days before arrival, pays a cleaning fee of 50 dollars, and allows at most 7 guests in the unit.\nRule 48: a booking whose arrival falls on day 48 of the season may change its dates up to 7 days before arrival, pays a cleaning fee of 55 dollars, and allows at most 2 guests in the unit.\nRule 49: a booking whose arrival falls on day 49 of the season may change its dates up to 8 days before arrival, pays a cleaning fee of 60 dollars, and allows at most 3 guests in the unit.\nRule 50: a booking whose arrival falls on day 50 of the season may change its dates up to 9 days before arrival, pays a cleaning fee of 65 dollars, and allows at most 4 guests in the unit.\nRule 51: a booking whose arrival falls on day 51 of the season may change its dates up to 10 days before arrival, pays a cleaning fee of 70 dollars, and allows at most 5 guests in the unit.\nRule 52: a booking whose arrival falls on day 52 of the season may change its dates up to 11 days before arrival, pays a cleaning fee of 75 dollars, and allows at most 6 guests in the unit.\nRule 53: a booking whose arrival falls on day 53 of the season may change its dates up to 12 days before arrival, pays a cleaning fee of 80 dollars, and allows at most 7 guests in the unit.\nRule 54: a booking whose arrival falls on day 54 of the season may change its dates up to 13 days before arrival, pays a cleaning fee of 40 dollars, and allows at most 2 guests in the unit.\nRule 55: a booking whose arrival falls on day 55 of the season may change its dates up to 14 days before arrival, pays a cleaning fee of 45 dollars, and allows at most 3 guests in the unit.\nRule 56: a booking whose arrival falls on day 56 of the season may change its dates up to 1 days before arrival, pays a cleaning fee of 50 dollars, and allows at most 4 guests in the unit.\nRule 57: a booking whose arrival falls on day 57 of the season may change its dates up to 2 days before arrival, pays a cleaning fee of 55 dollars, and allows at most 5 guests in the unit.\nRule 58: a booking whose arrival falls on day 58 of the season may change its dates up to 3 days before arrival, pays a cleaning fee of 60 dollars, and allows at most 6 guests in the unit.\nRule 59: a booking whose arrival falls on day 59 of the season may change its dates up to 4 days before arrival, pays a cleaning fee of 65 dollars, and allows at most 7 guests in the unit.\nRule 60: a booking whose arrival falls on day 60 of the season may change its dates up to 5 days before arrival, pays a cleaning fee of 70 dollars, and allows at most 2 guests in the unit.\nRule 61: a booking whose arrival falls on day 61 of the season may change its dates up to 6 days before arrival, pays a cleaning fee of 75 dollars, and allows at most 3 guests in the unit.\nRule 62: a booking whose arrival falls on day 62 of the season may change its dates up to 7 days before arrival, pays a cleaning fee of 80 dollars, and allows at most 4 guests in the unit.\nRule 63: a booking whose arrival falls on day 63 of the season may change its dates up to 8 days before arrival, pays a cleaning fee of 40 dollars, and allows at most 5 guests in the unit.\nRule 64: a booking whose arrival falls on day 64 of the season may change its dates up to 9 days before arrival, pays a cleaning fee of 45 dollars, and allows at most 6 guests in the unit.\nRule 65: a booking whose arrival falls on day 65 of the season may change its dates up to 10 days before arrival, pays a cleaning fee of 50 dollars, and allows at most 7 guests in the unit.\nRule 66: a booking whose arrival falls on day 66 of the season may change its dates up to 11 days before arrival, pays a cleaning fee of 55 dollars, and allows at most 2 guests in the unit.\nRule 67: a booking whose arrival falls on day 67 of the season may change its dates up to 12 days before arrival, pays a cleaning fee of 60 dollars, and allows at most 3 guests in the unit.\nRule 68: a booking whose arrival falls on day 68 of the season may change its dates up to 13 days before arrival, pays a cleaning fee of 65 dollars, and allows at most 4 guests in the unit.\nRule 69: a booking whose arrival falls on day 69 of the season may change its dates up to 14 days before arrival, pays a cleaning fee of 70 dollars, and allows at most 5 guests in the unit.\nRule 70: a booking whose arrival falls on day 70 of the season may change its dates up to 1 days before arrival, pays a cleaning fee of 75 dollars, and allows at most 6 guests in the unit.",
+                            "cache_control": {
+                                "type": "ephemeral"
+                            }
+                        }
+                    ],
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": "Which rule covers day 12? Answer with the rule number only."
+                                }
+                            ]
+                        }
+                    ],
+                    "tools": [
+                        {
+                            "name": "get_weather",
+                            "description": "Current weather for a city.",
+                            "input_schema": {
+                                "type": "object",
+                                "properties": {
+                                    "city": {
+                                        "type": "string",
+                                        "description": "City name"
+                                    }
+                                },
+                                "required": [
+                                    "city"
+                                ]
+                            },
+                            "cache_control": {
+                                "type": "ephemeral",
+                                "ttl": "1h"
+                            }
+                        }
+                    ],
+                    "cache_control": {
+                        "type": "ephemeral"
+                    }
+                }
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "request-id": "req_011CSyntheticCache2",
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "id": "msg_01SyntheticCache2",
+                    "type": "message",
+                    "role": "assistant",
+                    "model": "claude-haiku-5-5",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "Rule 12."
+                        }
+                    ],
+                    "stop_reason": "end_turn",
+                    "stop_sequence": null,
+                    "usage": {
+                        "input_tokens": 3,
+                        "cache_creation_input_tokens": 16,
+                        "cache_read_input_tokens": 5125,
+                        "cache_creation": {
+                            "ephemeral_5m_input_tokens": 16,
+                            "ephemeral_1h_input_tokens": 0
+                        },
+                        "output_tokens": 5
                     }
                 }
             }

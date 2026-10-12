@@ -2,8 +2,8 @@
     "scenario": "tool_error_result",
     "provider": "anthropic",
     "model": "claude-haiku-5-5",
-    "recordedAt": "2026-10-12T00:00:00Z",
-    "synthetic": true,
+    "recordedAt": "2026-10-12T16:41:48Z",
+    "synthetic": false,
     "exchanges": [
         {
             "request": {
@@ -51,32 +51,47 @@
             "response": {
                 "status": 200,
                 "headers": {
-                    "request-id": "req_011CSynthetic0013",
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "request-id": "req_011CfxgAukt7QJDmEsM6HfW3"
                 },
                 "body": {
-                    "id": "msg_01Synthetic0013",
+                    "model": "claude-haiku-5-5",
+                    "id": "msg_011CfxgAv7DpLdBzS5T2wG79",
                     "type": "message",
                     "role": "assistant",
-                    "model": "claude-haiku-5-5",
                     "content": [
                         {
                             "type": "tool_use",
-                            "id": "toolu_01E",
+                            "id": "toolu_017HAsiDVac317kde7ztcnhC",
                             "name": "get_weather",
                             "input": {
                                 "city": "Atlantis"
+                            },
+                            "caller": {
+                                "type": "direct"
                             }
                         }
                     ],
+                    "container": null,
                     "stop_reason": "tool_use",
                     "stop_sequence": null,
+                    "stop_details": null,
                     "usage": {
-                        "input_tokens": 25,
-                        "output_tokens": 12,
+                        "input_tokens": 390,
                         "cache_creation_input_tokens": 0,
-                        "cache_read_input_tokens": 0
-                    }
+                        "cache_read_input_tokens": 0,
+                        "cache_creation": {
+                            "ephemeral_5m_input_tokens": 0,
+                            "ephemeral_1h_input_tokens": 0
+                        },
+                        "output_tokens": 52,
+                        "output_tokens_details": {
+                            "thinking_tokens": 0
+                        },
+                        "service_tier": "standard",
+                        "inference_geo": "global"
+                    },
+                    "diagnostics": null
                 }
             }
         },
@@ -107,7 +122,7 @@
                             "content": [
                                 {
                                     "type": "tool_use",
-                                    "id": "toolu_01E",
+                                    "id": "toolu_017HAsiDVac317kde7ztcnhC",
                                     "name": "get_weather",
                                     "input": {
                                         "city": "Atlantis"
@@ -120,7 +135,7 @@
                             "content": [
                                 {
                                     "type": "tool_result",
-                                    "tool_use_id": "toolu_01E",
+                                    "tool_use_id": "toolu_017HAsiDVac317kde7ztcnhC",
                                     "content": "City not found: Atlantis",
                                     "is_error": true
                                 }
@@ -150,28 +165,45 @@
             "response": {
                 "status": 200,
                 "headers": {
-                    "request-id": "req_011CSynthetic0014",
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "request-id": "req_011CfxgAzSvSWN6fWKmhY5aX"
                 },
                 "body": {
-                    "id": "msg_01Synthetic0014",
+                    "model": "claude-haiku-5-5",
+                    "id": "msg_011CfxgAzriNJRfXGt3y4pDT",
                     "type": "message",
                     "role": "assistant",
-                    "model": "claude-haiku-5-5",
                     "content": [
                         {
+                            "type": "thinking",
+                            "thinking": "",
+                            "signature": "CAQStAUKEAgSGAI4AUIIdGhpbmtpbmcSDFpGAzaKnZ9KVC50dxoM1tSLay+pI3z7UjznIjAkk7AMAnF9kOSZNh3WjI5rwo6PnotC1hz8ifpWmTN2nT/f91sHTawLW16LSG0VZsAq0QRfJKw/6OhrC458HRxmG2eWPefVnGcDWiwqRWlX9DNNgYpJJ3bJYeVBLSWkeODPI6GPHSSxXDZ6wMhSWkjScnRBBTcAIy+fCe+boA8DSTkos/la0JhJRC+9gRsZPKS3quN9Tae95FQLSiNaTkDOdMwasZhsjsotjMeVgckM/Ht9pnDKPajPXHRbqAs1wAyGcTDMVNYSjNV6er51KDoSZOFpyxVxGwsPXLx+0NB8YA0qUyu6VofWoNYt5sl7ul2BsWJZgRouw17Z/CHLGj2kTa0hnujZm3eyuRbjSLNDM655vaihJNoLpGc8MTODFweliCBKTH+o2ENiTyLymBSoKl0y7o/QO2OZCHGPPbwFXqC2nI9+naFIHVvvHaLjoUMSBAdDHY3Si7efbQaMu3IMwof3SrQ10u5bR2uJhRC1TMfrm7ZlKIRWQmzQLZ1ZBH0tkapYHHnu+/GIoPBgFxI95p8FLURMPwMVaMS3z1oudxQ4uVHklaNUukzjvR9SAOZjRvF40HftadnPJzSqrQUBahn4QEKTnMuHXJsC5L1wGKnFf+sDx24P8DCSZVe6/g4zPEbMeW+ImrkyqhpM7PnTsYJKdrCRnzVYhqe7flElynstEZR/ufNen9VILoiezgqa/1+szVsdypsF1sAHtV9cg88/Q6T+28vm3AVtBl6yYldohn53RL4Lk/bJ1UNiqDar5S4zo7YSs98gUL5sMRlPdDdmbcgWKfa2bZb5Ea9XuaYcQKU7Sj3oO25m+9IaDxTqCMMF+ro/3TnmrVSqZFVUeIPOVhgB"
+                        },
+                        {
                             "type": "text",
-                            "text": "I could not find a city called Atlantis."
+                            "text": "I couldn't get weather for Atlantis because the weather service returned a \"City not found\" error. Atlantis is a legendary city from Plato's writings, so it doesn't exist as a real location with weather data. If you meant a real city with a similar name, or can give me the name of one, I can look that up."
                         }
                     ],
+                    "container": null,
                     "stop_reason": "end_turn",
                     "stop_sequence": null,
+                    "stop_details": null,
                     "usage": {
-                        "input_tokens": 25,
-                        "output_tokens": 12,
+                        "input_tokens": 462,
                         "cache_creation_input_tokens": 0,
-                        "cache_read_input_tokens": 0
-                    }
+                        "cache_read_input_tokens": 0,
+                        "cache_creation": {
+                            "ephemeral_5m_input_tokens": 0,
+                            "ephemeral_1h_input_tokens": 0
+                        },
+                        "output_tokens": 130,
+                        "output_tokens_details": {
+                            "thinking_tokens": 35
+                        },
+                        "service_tier": "standard",
+                        "inference_geo": "global"
+                    },
+                    "diagnostics": null
                 }
             }
         }

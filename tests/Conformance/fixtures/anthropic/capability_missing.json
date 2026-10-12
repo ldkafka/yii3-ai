@@ -2,7 +2,7 @@
     "scenario": "capability_missing",
     "provider": "anthropic",
     "model": "claude-haiku-5-5",
-    "recordedAt": "2026-10-12T00:00:00Z",
-    "synthetic": true,
+    "recordedAt": "2026-10-12T16:41:56Z",
+    "synthetic": false,
     "exchanges": []
 }

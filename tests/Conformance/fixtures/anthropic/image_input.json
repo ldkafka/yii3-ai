@@ -37,7 +37,7 @@
                                     "type": "image",
                                     "source": {
                                         "type": "url",
-                                        "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png"
+                                        "url": "https://raw.githubusercontent.com/ldkafka/yii3-ai/main/tests/Conformance/media/test-image.png"
                                     }
                                 }
                             ]

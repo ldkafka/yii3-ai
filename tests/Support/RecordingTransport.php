@@ -30,6 +30,9 @@ final class RecordingTransport implements TransportInterface
     /** @var list<HttpRequest> */
     public array $requests = [];
 
+    /** @var list<HttpResponse> The responses received so far. */
+    public array $responses = [];
+
     /** @var list<array{request: HttpRequest, response: HttpResponse}> */
     private array $exchanges = [];
 
@@ -47,6 +50,7 @@ final class RecordingTransport implements TransportInterface
     {
         $this->requests[] = $request;
         $response = $this->inner->send($request);
+        $this->responses[] = $response;
         $this->exchanges[] = ['request' => $request, 'response' => $response];
 
         return $response;

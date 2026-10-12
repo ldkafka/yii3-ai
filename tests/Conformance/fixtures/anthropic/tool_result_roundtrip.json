@@ -2,8 +2,8 @@
     "scenario": "tool_result_roundtrip",
     "provider": "anthropic",
     "model": "claude-haiku-5-5",
-    "recordedAt": "2026-10-12T00:00:00Z",
-    "synthetic": true,
+    "recordedAt": "2026-10-12T16:41:43Z",
+    "synthetic": false,
     "exchanges": [
         {
             "request": {
@@ -55,32 +55,47 @@
             "response": {
                 "status": 200,
                 "headers": {
-                    "request-id": "req_011CSynthetic0009",
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "request-id": "req_011CfxgAawJCFwxUrt5WnFFy"
                 },
                 "body": {
-                    "id": "msg_01Synthetic0009",
+                    "model": "claude-haiku-5-5",
+                    "id": "msg_011CfxgAbKchzTTnfTWkJUTV",
                     "type": "message",
                     "role": "assistant",
-                    "model": "claude-haiku-5-5",
                     "content": [
                         {
                             "type": "tool_use",
-                            "id": "toolu_01B",
+                            "id": "toolu_012SppSo1KUGLCsM5DEaM6e4",
                             "name": "get_weather",
                             "input": {
                                 "city": "Paris"
+                            },
+                            "caller": {
+                                "type": "direct"
                             }
                         }
                     ],
+                    "container": null,
                     "stop_reason": "tool_use",
                     "stop_sequence": null,
+                    "stop_details": null,
                     "usage": {
-                        "input_tokens": 25,
-                        "output_tokens": 12,
+                        "input_tokens": 507,
                         "cache_creation_input_tokens": 0,
-                        "cache_read_input_tokens": 0
-                    }
+                        "cache_read_input_tokens": 0,
+                        "cache_creation": {
+                            "ephemeral_5m_input_tokens": 0,
+                            "ephemeral_1h_input_tokens": 0
+                        },
+                        "output_tokens": 34,
+                        "output_tokens_details": {
+                            "thinking_tokens": 0
+                        },
+                        "service_tier": "standard",
+                        "inference_geo": "global"
+                    },
+                    "diagnostics": null
                 }
             }
         },
@@ -111,7 +126,7 @@
                             "content": [
                                 {
                                     "type": "tool_use",
-                                    "id": "toolu_01B",
+                                    "id": "toolu_012SppSo1KUGLCsM5DEaM6e4",
                                     "name": "get_weather",
                                     "input": {
                                         "city": "Paris"
@@ -124,7 +139,7 @@
                             "content": [
                                 {
                                     "type": "tool_result",
-                                    "tool_use_id": "toolu_01B",
+                                    "tool_use_id": "toolu_012SppSo1KUGLCsM5DEaM6e4",
                                     "content": "18 degrees and sunny"
                                 },
                                 {
@@ -157,28 +172,40 @@
             "response": {
                 "status": 200,
                 "headers": {
-                    "request-id": "req_011CSynthetic0010",
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "request-id": "req_011CfxgAfBngzHJCsJAMgujt"
                 },
                 "body": {
-                    "id": "msg_01Synthetic0010",
+                    "model": "claude-haiku-5-5",
+                    "id": "msg_011CfxgAfXsngpL3LRw17KjB",
                     "type": "message",
                     "role": "assistant",
-                    "model": "claude-haiku-5-5",
                     "content": [
                         {
                             "type": "text",
-                            "text": "It is 18 degrees and sunny in Paris."
+                            "text": "It's currently 18 degrees and sunny in Paris."
                         }
                     ],
+                    "container": null,
                     "stop_reason": "end_turn",
                     "stop_sequence": null,
+                    "stop_details": null,
                     "usage": {
-                        "input_tokens": 25,
-                        "output_tokens": 12,
+                        "input_tokens": 458,
                         "cache_creation_input_tokens": 0,
-                        "cache_read_input_tokens": 0
-                    }
+                        "cache_read_input_tokens": 0,
+                        "cache_creation": {
+                            "ephemeral_5m_input_tokens": 0,
+                            "ephemeral_1h_input_tokens": 0
+                        },
+                        "output_tokens": 21,
+                        "output_tokens_details": {
+                            "thinking_tokens": 0
+                        },
+                        "service_tier": "standard",
+                        "inference_geo": "global"
+                    },
+                    "diagnostics": null
                 }
             }
         }

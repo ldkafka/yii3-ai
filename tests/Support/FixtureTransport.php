@@ -35,6 +35,9 @@ final class FixtureTransport implements TransportInterface
     /** @var list<HttpRequest> */
     public array $requests = [];
 
+    /** @var list<HttpResponse> The responses replayed so far. */
+    public array $responses = [];
+
     /**
      * @param array<string, mixed> $fixture The decoded fixture file.
      * @param bool $checkRequests Whether outgoing requests must equal the recorded ones.
@@ -104,7 +107,7 @@ final class FixtureTransport implements TransportInterface
         }
         $status = $response['status'] ?? 200;
 
-        return new HttpResponse(is_int($status) ? $status : 200, $headers, $body);
+        return $this->responses[] = new HttpResponse(is_int($status) ? $status : 200, $headers, $body);
     }
 
     /**
