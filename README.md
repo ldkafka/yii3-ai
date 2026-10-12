@@ -18,7 +18,8 @@ No vendor SDKs: the runtime needs `ext-curl`, `ext-json` and `psr/log`.
 - A client for tools on remote MCP servers.
 
 Status: 0.1, Anthropic only for now. The API may change before 1.0 (the CHANGELOG says how). The conformance
-fixtures are hand-written until they are re-recorded from the live API. Plans: [ROADMAP.md](ROADMAP.md).
+fixtures are recorded from the live API (Claude Haiku 5.5), except four error scenarios that cannot be triggered
+on demand. Plans: [ROADMAP.md](ROADMAP.md).
 
 ## Installation
 
@@ -276,9 +277,9 @@ vendor/bin/phpstan analyse
 The database tests need `pdo_sqlite` and are skipped without it.
 
 The conformance suite (`tests/Conformance`) runs 20 scenarios through a real `Client` on fixtures
-and checks every outgoing request against the one in the fixture. The fixtures are hand-written from
-the documented API shapes and are re-recorded from the live API before release; `"synthetic": true`
-marks those not yet recorded. To run the suite against the live API
+and checks every outgoing request against the one in the fixture. The fixtures are recorded from the
+live API; `"synthetic": true` marks the four hand-written ones (errors and a refusal that cannot be
+triggered on demand). To run the suite against the live API
 (about a cent with Haiku):
 
 ```bash

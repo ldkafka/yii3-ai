@@ -5,6 +5,20 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 [Semantic Versioning](https://semver.org/). In 0.x a minor release may break the API; such a release
 has a "Backwards compatibility" section. Patch releases never do.
 
+## [0.1.1] - 2026-10-12
+
+### Changed
+- The Anthropic conformance fixtures are recorded from the live API (Claude Haiku 5.5): 17 scenarios,
+  including a real prompt-cache write and read. Four error scenarios that cannot be triggered on demand
+  stay hand-written (`"synthetic": true`).
+- Conformance checks compare against the requests and responses actually sent and received, not fixed
+  values, so they hold for any valid recording and also run live.
+- The image scenario downloads a test image from this repository; some hosts refuse Anthropic's fetcher.
+
+### Added
+- `ANTHROPIC_WORKSPACE_ID` for live test runs with a key that is not scoped to one workspace.
+- README: the Windows CA bundle note (curl error 60) and the workspace variable.
+
 ## [0.1.0] - 2026-10-12
 
 ### Added

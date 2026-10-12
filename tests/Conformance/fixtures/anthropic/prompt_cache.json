@@ -2,8 +2,8 @@
     "scenario": "prompt_cache",
     "provider": "anthropic",
     "model": "claude-haiku-5-5",
-    "recordedAt": "2026-10-12T00:00:00Z",
-    "synthetic": true,
+    "recordedAt": "2026-10-12T17:38:43Z",
+    "synthetic": false,
     "exchanges": [
         {
             "request": {
@@ -67,32 +67,40 @@
             "response": {
                 "status": 200,
                 "headers": {
-                    "request-id": "req_011CSyntheticCache1",
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "request-id": "req_011CfxkWgBLLapc7kSeuXjQB"
                 },
                 "body": {
-                    "id": "msg_01SyntheticCache1",
+                    "model": "claude-haiku-5-5",
+                    "id": "msg_011CfxkWgWguz4aALTKD1wvV",
                     "type": "message",
                     "role": "assistant",
-                    "model": "claude-haiku-5-5",
                     "content": [
                         {
                             "type": "text",
-                            "text": "Rule 7."
+                            "text": "Rule 7"
                         }
                     ],
+                    "container": null,
                     "stop_reason": "end_turn",
                     "stop_sequence": null,
+                    "stop_details": null,
                     "usage": {
-                        "input_tokens": 12,
-                        "cache_creation_input_tokens": 5140,
+                        "input_tokens": 4,
+                        "cache_creation_input_tokens": 5523,
                         "cache_read_input_tokens": 0,
                         "cache_creation": {
-                            "ephemeral_5m_input_tokens": 5020,
-                            "ephemeral_1h_input_tokens": 120
+                            "ephemeral_5m_input_tokens": 5523,
+                            "ephemeral_1h_input_tokens": 0
                         },
-                        "output_tokens": 5
-                    }
+                        "output_tokens": 7,
+                        "output_tokens_details": {
+                            "thinking_tokens": 0
+                        },
+                        "service_tier": "standard",
+                        "inference_geo": "global"
+                    },
+                    "diagnostics": null
                 }
             }
         },
@@ -158,32 +166,40 @@
             "response": {
                 "status": 200,
                 "headers": {
-                    "request-id": "req_011CSyntheticCache2",
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "request-id": "req_011CfxkWkjvoDv3xHWd8MR9m"
                 },
                 "body": {
-                    "id": "msg_01SyntheticCache2",
+                    "model": "claude-haiku-5-5",
+                    "id": "msg_011CfxkWm61WMZH1wVWguD8Q",
                     "type": "message",
                     "role": "assistant",
-                    "model": "claude-haiku-5-5",
                     "content": [
                         {
                             "type": "text",
-                            "text": "Rule 12."
+                            "text": "Rule 12"
                         }
                     ],
+                    "container": null,
                     "stop_reason": "end_turn",
                     "stop_sequence": null,
+                    "stop_details": null,
                     "usage": {
-                        "input_tokens": 3,
-                        "cache_creation_input_tokens": 16,
-                        "cache_read_input_tokens": 5125,
+                        "input_tokens": 4,
+                        "cache_creation_input_tokens": 92,
+                        "cache_read_input_tokens": 5431,
                         "cache_creation": {
-                            "ephemeral_5m_input_tokens": 16,
+                            "ephemeral_5m_input_tokens": 92,
                             "ephemeral_1h_input_tokens": 0
                         },
-                        "output_tokens": 5
-                    }
+                        "output_tokens": 7,
+                        "output_tokens_details": {
+                            "thinking_tokens": 0
+                        },
+                        "service_tier": "standard",
+                        "inference_geo": "global"
+                    },
+                    "diagnostics": null
                 }
             }
         }

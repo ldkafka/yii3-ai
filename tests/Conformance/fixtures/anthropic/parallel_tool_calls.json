@@ -2,7 +2,7 @@
     "scenario": "parallel_tool_calls",
     "provider": "anthropic",
     "model": "claude-haiku-5-5",
-    "recordedAt": "2026-10-12T16:41:45Z",
+    "recordedAt": "2026-10-12T17:38:35Z",
     "synthetic": false,
     "exchanges": [
         {
@@ -52,17 +52,17 @@
                 "status": 200,
                 "headers": {
                     "content-type": "application/json",
-                    "request-id": "req_011CfxgAjYj78jpT2LaHnWiu"
+                    "request-id": "req_011CfxkW3D6xW2WJ2QfDNtgF"
                 },
                 "body": {
                     "model": "claude-haiku-5-5",
-                    "id": "msg_011CfxgAjtZfXAcSFnP2gNAc",
+                    "id": "msg_011CfxkW3XhgbZywvupry5nG",
                     "type": "message",
                     "role": "assistant",
                     "content": [
                         {
                             "type": "tool_use",
-                            "id": "toolu_01P4LQVgb5rkTAUAt4Pe5nio",
+                            "id": "toolu_01XNiTGX976ZX3925JXUdAd6",
                             "name": "get_weather",
                             "input": {
                                 "city": "Paris"
@@ -73,7 +73,7 @@
                         },
                         {
                             "type": "tool_use",
-                            "id": "toolu_01FSuNDrTL9RpWZcc7mTtHaT",
+                            "id": "toolu_011q2jFRa7T2TCdKg8VtmSwr",
                             "name": "get_weather",
                             "input": {
                                 "city": "Rome"
@@ -133,7 +133,7 @@
                             "content": [
                                 {
                                     "type": "tool_use",
-                                    "id": "toolu_01P4LQVgb5rkTAUAt4Pe5nio",
+                                    "id": "toolu_01XNiTGX976ZX3925JXUdAd6",
                                     "name": "get_weather",
                                     "input": {
                                         "city": "Paris"
@@ -141,7 +141,7 @@
                                 },
                                 {
                                     "type": "tool_use",
-                                    "id": "toolu_01FSuNDrTL9RpWZcc7mTtHaT",
+                                    "id": "toolu_011q2jFRa7T2TCdKg8VtmSwr",
                                     "name": "get_weather",
                                     "input": {
                                         "city": "Rome"
@@ -154,12 +154,12 @@
                             "content": [
                                 {
                                     "type": "tool_result",
-                                    "tool_use_id": "toolu_01P4LQVgb5rkTAUAt4Pe5nio",
+                                    "tool_use_id": "toolu_01XNiTGX976ZX3925JXUdAd6",
                                     "content": "18 degrees in Paris"
                                 },
                                 {
                                     "type": "tool_result",
-                                    "tool_use_id": "toolu_01FSuNDrTL9RpWZcc7mTtHaT",
+                                    "tool_use_id": "toolu_011q2jFRa7T2TCdKg8VtmSwr",
                                     "content": "18 degrees in Rome"
                                 }
                             ]
@@ -189,17 +189,22 @@
                 "status": 200,
                 "headers": {
                     "content-type": "application/json",
-                    "request-id": "req_011CfxgApVtJp7prTU6ETTAD"
+                    "request-id": "req_011CfxkW834d3Nitq2Be7L8C"
                 },
                 "body": {
                     "model": "claude-haiku-5-5",
-                    "id": "msg_011CfxgAprTahUGaA66jmw3H",
+                    "id": "msg_011CfxkW8Rsb3pH5Yzn8R2Ps",
                     "type": "message",
                     "role": "assistant",
                     "content": [
                         {
+                            "type": "thinking",
+                            "thinking": "",
+                            "signature": "CAQS2QUKEAgSGAI4AUIIdGhpbmtpbmcSDLepkBfNBiRRreI7ChoM5ko5mmqItFhysefcIjD/J+S80u6WseiGc3mksp74o5EWLwQM56r8+M2C61FVGk4nlce5FK6YN2YdqfsnwOAq9gQkDDUD5SnDD4lbOW8EoEgbmOD4EOz47cw5T3Hi3cxK6h/srbOVCgpHYWLMiQMb8YLj0e46kr0bi8HEFlxE2ocNSWE7e9rUwAzIjp0R3xFLwyH3F/lgiRejADYZ7D/jXdWEdA3Eb87lhYdL0GLyjP9i+SiEPfqbMb4/Dcyk1oorfsMtz5A3mKl1BryAbmxobp71NH4/vz67t4EgLpYAdqaeOQ+/nqVcY4GjcjrwFTbgJQc1/c0DIGIwTrr689Kr+bxh6XMgXs9XZSzhRlt0Emi1sm1y1xDx7MWthM9Q+aCbWyjezQdCaWXqp4/hAtOOZ/8UQ/krVUIM9jUQUXWbLvhcegkjqqkEu6pM77razag04nKen4JzCExic4M/G2y+mXdVv1pyG6jtR0oorRttMdqOjrvwGB/i477u1EcGax0Zm1K1Cjv7eqDCGEGsmztMvSXU3PKCKN4pGI92XmSYN0/z88sTOBzxSppxueS7GGPkZmb31WKt8M0WUbLUkrpcjjIcHPqEscq4AFQqvbFQmtE5LQhoERmLT3too6E6wp2pjPFZcyxGEcdaIk1gPbUxLxqjyvmWJAs192HAHQ8YhRGLheURzGJALOGXVLDWAlDLroLMctsOkat9zOwWXmoA3hrU6yEoQPygm4SPIigrHhO+y3NUe4b6qCZDZeO6lhn0uqY0OKj8G0ratASm+nnBUFgLkmGPkpaXgiEv61NWks6X43crxMmjh48Jznlj3kXWo4T7kLQORgeaBlVCFtupIuHYiISw7AwaX2Nw01RBs6oC+2hog+aHwb9Ak7E5GswdlZsuUhuZ7Nz627+u2UMgZDdNDwZVfoYYAQ=="
+                        },
+                        {
                             "type": "text",
-                            "text": "Paris and Rome are both at 18 degrees. The results didn't state a unit, so I can't say whether that's Celsius or Fahrenheit."
+                            "text": "Paris and Rome are both at 18 degrees. The tool didn't specify a unit, so I can't say whether that's Celsius or Fahrenheit."
                         }
                     ],
                     "container": null,
@@ -214,9 +219,9 @@
                             "ephemeral_5m_input_tokens": 0,
                             "ephemeral_1h_input_tokens": 0
                         },
-                        "output_tokens": 51,
+                        "output_tokens": 100,
                         "output_tokens_details": {
-                            "thinking_tokens": 0
+                            "thinking_tokens": 47
                         },
                         "service_tier": "standard",
                         "inference_geo": "global"

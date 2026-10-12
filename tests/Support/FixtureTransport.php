@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ldkafka\Ai\Tests\Support;
 
+use Ldkafka\Ai\Client;
 use Ldkafka\Ai\Http\HttpRequest;
 use Ldkafka\Ai\Http\HttpResponse;
 use Ldkafka\Ai\Http\TransportInterface;
@@ -20,6 +21,7 @@ use function is_string;
 use function ksort;
 use function parse_url;
 use function sprintf;
+use function str_replace;
 use function strtolower;
 
 /**
@@ -29,6 +31,9 @@ use function strtolower;
  */
 final class FixtureTransport implements TransportInterface
 {
+    /** Replaced with Client::VERSION when a fixture is loaded. */
+    public const CLIENT_VERSION = '{{CLIENT_VERSION}}';
+
     /** @var list<array<string, mixed>> */
     private array $exchanges;
 
@@ -70,6 +75,8 @@ final class FixtureTransport implements TransportInterface
     {
         $json = file_get_contents($path);
         Assert::assertIsString($json, 'Cannot read fixture ' . $path);
+        // Fixtures name the package version as a placeholder, so a version bump needs no fixture edits.
+        $json = str_replace(self::CLIENT_VERSION, Client::VERSION, $json);
         // Empty JSON objects stay objects, so a recorded {} is replayed and compared as {}.
         $data = Json::decodeKeepEmptyObjects($json);
         Assert::assertIsArray($data);

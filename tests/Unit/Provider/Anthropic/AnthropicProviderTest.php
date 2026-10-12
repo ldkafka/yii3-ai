@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ldkafka\Ai\Tests\Unit\Provider\Anthropic;
 
+use Ldkafka\Ai\Client;
 use Ldkafka\Ai\Exception\ConfigurationException;
 use Ldkafka\Ai\Exception\ErrorKind;
 use Ldkafka\Ai\Exception\ProviderException;
@@ -36,7 +37,7 @@ final class AnthropicProviderTest extends TestCase
             'anthropic-version' => '2023-06-01',
             'content-type' => 'application/json',
             'accept' => 'application/json',
-            'user-agent' => 'ldkafka-yii3-ai/0.1.0',
+            'user-agent' => 'ldkafka-yii3-ai/' . Client::VERSION,
             'anthropic-beta' => 'b-1,b-2,b-3',
         ], $sent->headers);
         self::assertStringNotContainsString('betas', $sent->body);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ldkafka\Ai\Tests\Unit\Mcp;
 
+use Ldkafka\Ai\Client;
 use Ldkafka\Ai\Exception\McpException;
 use Ldkafka\Ai\Exception\TransportException;
 use Ldkafka\Ai\Http\HttpResponse;
@@ -27,7 +28,7 @@ final class McpHttpClientTest extends TestCase
 
         self::assertSame('2025-06-18', $result['protocolVersion']);
         self::assertArrayNotHasKey('authorization', $transport->requests[0]->headers);
-        self::assertSame('ldkafka-yii3-ai/0.1.0', $transport->requests[0]->headers['user-agent']);
+        self::assertSame('ldkafka-yii3-ai/' . Client::VERSION, $transport->requests[0]->headers['user-agent']);
         self::assertCount(2, $logger->records);
         self::assertSame('debug', $logger->records[0]['level']);
         self::assertStringContainsString('MCP initialize: HTTP 200', $logger->records[0]['message']);

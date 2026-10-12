@@ -2,7 +2,7 @@
     "scenario": "thinking_roundtrip",
     "provider": "anthropic",
     "model": "claude-haiku-5-5",
-    "recordedAt": "2026-10-12T16:41:52Z",
+    "recordedAt": "2026-10-12T17:38:41Z",
     "synthetic": false,
     "exchanges": [
         {
@@ -55,17 +55,17 @@
                 "status": 200,
                 "headers": {
                     "content-type": "application/json",
-                    "request-id": "req_011CfxgBDKp4YeVLAsryE4rG"
+                    "request-id": "req_011CfxkWWC4tjU2cvXqUNNnB"
                 },
                 "body": {
                     "model": "claude-haiku-5-5",
-                    "id": "msg_011CfxgBDf9xdJmtqq9Wihh2",
+                    "id": "msg_011CfxkWWY9vxVwTbYqZ5iqm",
                     "type": "message",
                     "role": "assistant",
                     "content": [
                         {
                             "type": "tool_use",
-                            "id": "toolu_017b4jbqfMYYmKz8dp822Zkf",
+                            "id": "toolu_013vF4BbhkSaw4AtSLQUMZk6",
                             "name": "get_weather",
                             "input": {
                                 "city": "Paris"
@@ -125,7 +125,7 @@
                             "content": [
                                 {
                                     "type": "tool_use",
-                                    "id": "toolu_017b4jbqfMYYmKz8dp822Zkf",
+                                    "id": "toolu_013vF4BbhkSaw4AtSLQUMZk6",
                                     "name": "get_weather",
                                     "input": {
                                         "city": "Paris"
@@ -138,7 +138,7 @@
                             "content": [
                                 {
                                     "type": "tool_result",
-                                    "tool_use_id": "toolu_017b4jbqfMYYmKz8dp822Zkf",
+                                    "tool_use_id": "toolu_013vF4BbhkSaw4AtSLQUMZk6",
                                     "content": "18 degrees and sunny"
                                 }
                             ]
@@ -168,17 +168,17 @@
                 "status": 200,
                 "headers": {
                     "content-type": "application/json",
-                    "request-id": "req_011CfxgBJ64ZW7ntTrfTyJC1"
+                    "request-id": "req_011CfxkWaaVwBnQksN6V8deu"
                 },
                 "body": {
                     "model": "claude-haiku-5-5",
-                    "id": "msg_011CfxgBJSeY6VxJd7pCUM1b",
+                    "id": "msg_011CfxkWaxpTwRjyN4bp6GzU",
                     "type": "message",
                     "role": "assistant",
                     "content": [
                         {
                             "type": "text",
-                            "text": "It's currently 18 degrees and sunny in Paris. The tool didn't say whether that's Celsius or Fahrenheit, but 18 is most likely Celsius, the usual unit in France."
+                            "text": "It's currently 18 degrees and sunny in Paris. The temperature is probably in Celsius, since that's the usual unit in France, but the tool didn't specify."
                         }
                     ],
                     "container": null,
@@ -193,7 +193,7 @@
                             "ephemeral_5m_input_tokens": 0,
                             "ephemeral_1h_input_tokens": 0
                         },
-                        "output_tokens": 66,
+                        "output_tokens": 55,
                         "output_tokens_details": {
                             "thinking_tokens": 0
                         },

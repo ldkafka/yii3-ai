@@ -2,7 +2,7 @@
     "scenario": "system_prompt",
     "provider": "anthropic",
     "model": "claude-haiku-5-5",
-    "recordedAt": "2026-10-12T16:41:34Z",
+    "recordedAt": "2026-10-12T17:38:21Z",
     "synthetic": false,
     "exchanges": [
         {
@@ -35,11 +35,11 @@
                 "status": 200,
                 "headers": {
                     "content-type": "application/json",
-                    "request-id": "req_011Cfxg9yFDE5NXXeiS61phV"
+                    "request-id": "req_011CfxkV8kCeKLLTEaynkMaR"
                 },
                 "body": {
                     "model": "claude-haiku-5-5",
-                    "id": "msg_011Cfxg9yc35Zpwd8TLizu7C",
+                    "id": "msg_011CfxkV9828TuzrSnieot5K",
                     "type": "message",
                     "role": "assistant",
                     "content": [

@@ -2,7 +2,7 @@
     "scenario": "multi_turn_replay",
     "provider": "anthropic",
     "model": "claude-haiku-5-5",
-    "recordedAt": "2026-10-12T16:41:35Z",
+    "recordedAt": "2026-10-12T17:38:22Z",
     "synthetic": false,
     "exchanges": [
         {
@@ -52,11 +52,11 @@
                 "status": 200,
                 "headers": {
                     "content-type": "application/json",
-                    "request-id": "req_011CfxgA56BnKEYUyZd6RCFA"
+                    "request-id": "req_011CfxkVEh9Bu34Yvb3anF8p"
                 },
                 "body": {
                     "model": "claude-haiku-5-5",
-                    "id": "msg_011CfxgA5RH1mRHuc5Ap36jH",
+                    "id": "msg_011CfxkVF4DcLyWveFpMb7i4",
                     "type": "message",
                     "role": "assistant",
                     "content": [

@@ -22,7 +22,7 @@
                         "capabilities": {},
                         "clientInfo": {
                             "name": "ldkafka-yii3-ai",
-                            "version": "0.1.0"
+                            "version": "{{CLIENT_VERSION}}"
                         }
                     }
                 },
@@ -71,7 +71,7 @@
                         "capabilities": {},
                         "clientInfo": {
                             "name": "ldkafka-yii3-ai",
-                            "version": "0.1.0"
+                            "version": "{{CLIENT_VERSION}}"
                         }
                     }
                 },

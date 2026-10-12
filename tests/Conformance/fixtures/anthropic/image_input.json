@@ -2,8 +2,8 @@
     "scenario": "image_input",
     "provider": "anthropic",
     "model": "claude-haiku-5-5",
-    "recordedAt": "2026-10-12T00:00:00Z",
-    "synthetic": true,
+    "recordedAt": "2026-10-12T17:38:27Z",
+    "synthetic": false,
     "exchanges": [
         {
             "request": {
@@ -48,28 +48,45 @@
             "response": {
                 "status": 200,
                 "headers": {
-                    "request-id": "req_011CSynthetic0006",
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    "request-id": "req_011CfxkVV7ZUsPsHkK8JZBJK"
                 },
                 "body": {
-                    "id": "msg_01Synthetic0006",
+                    "model": "claude-haiku-5-5",
+                    "id": "msg_011CfxkVVXNHLSMEGd4QjLYy",
                     "type": "message",
                     "role": "assistant",
-                    "model": "claude-haiku-5-5",
                     "content": [
                         {
+                            "type": "thinking",
+                            "thinking": "",
+                            "signature": "CAQStAcKEAgSGAI4AUIIdGhpbmtpbmcSDD4rMO4Tn6a6vZjqHhoMZd7+INjfFNDR1f6mIjAarteEbpHy90ECcNPn+30G6LjRAxRK/lOBTRswYO21jbkc7FoCD0vqcnAW9Pom6Xwq0QbIShCMhyGO7f09vhgM+1lnvrMNTz1OA6QOX4M2ILjDprLPjy86bzWzHytM6tMh3khQB+EDS06ZExDQ/ESX7eljAUef+ZKeGZtthBGqrFJy772umHuocvQgZ1cxmSLNYisLtzTJFgGdBcr9sM71tsalYEhxLjFGJ7g+IazDY8dwkUXo07+S1/3YsNeuo+s+WJnsEMelc3GZvWiz2U9eicRg6mJ4E7RqTJSBmdCLaWasgn3sVIsx9ychmffBGX1WuHsbTxf0rApGSwXINdanJFgRJafpGw3+MHelR9KcDPN46dCpqd7XxqBOLGJpiRyhr5a8//wh0G12QHskrLBTyk92iVo1AlCfQNdsge2PyW4IBUtQbvFt0hH/IsFt6Cb1cfps608Kgob9m7EwAGRcp+BCqNyghCG+d6czd/XiESGOajEndJrlxrgDw1MDEvJhCih14jUpza5y/swcUqt9vjxUrWdUWufVSXZmi4RJZbz1Q8dYyCu6wHiNdCH5b8+xQSPyW+cfgJ8UiKgmnbdFPNQEQryCa5+jukHjbJhPXKLOy+56pO8R4dfylZqpI+RfDAgYjMWPPcNvWR05mSf8LDonsra1rwHuNNOZJdUZNAlT+18jDo7ka/OowZT6NnJHMR6NpCuxMYvrKZmPOSjJj//+95Qe+lpWkGJVg1qTzpKohRX6CaP/ywAfkjvqudzN1W52o9N/vy0eRe/wzKccYBj1Y2QgJqFnMFwcQLDdr8vVm6HnrqcCTvE31WzK020y3gOzxq0HYEZ8+/LkFadUIdDlbNlGBDnadt4HyG/TQDEU/BExvQBFbSuRFcXv6gIHu4eHMldyVU1CGJoGT6vENDNhHq4xV09dn8rxJaQrrPlveKmexejZD8DIZgfPPyS0zyQWnfEO8yjeSgY2yuhSMF5r8l2L81ef4sdj43vBbFPLZlHnRLgXUQEj/EIQliBEQmvaTXgqAZBEG/vr85160Kat4JqEQyCB8HQx9VlJLgjkrXdZiaaB1k7Ssqwd1Secx5z5TYj3inGDm4Y2j+xfXQQn9NpzgnKA6wTaSysNkEULwxFnAJl2yUBQ5A0dKif2IkX0vvoAoA2Dq3r1DcjxO7jPT36zLED5F5NGH62OPyw8/usYAQ=="
+                        },
+                        {
                             "type": "text",
-                            "text": "A red pixel and two dice on a checkerboard."
+                            "text": "The first image is mostly white or pale with a small red spot. The second is split vertically into a blue left half and an orange right half."
                         }
                     ],
+                    "container": null,
                     "stop_reason": "end_turn",
                     "stop_sequence": null,
+                    "stop_details": null,
                     "usage": {
-                        "input_tokens": 1650,
-                        "output_tokens": 14,
+                        "input_tokens": 30,
                         "cache_creation_input_tokens": 0,
-                        "cache_read_input_tokens": 0
-                    }
+                        "cache_read_input_tokens": 0,
+                        "cache_creation": {
+                            "ephemeral_5m_input_tokens": 0,
+                            "ephemeral_1h_input_tokens": 0
+                        },
+                        "output_tokens": 155,
+                        "output_tokens_details": {
+                            "thinking_tokens": 115
+                        },
+                        "service_tier": "standard",
+                        "inference_geo": "global"
+                    },
+                    "diagnostics": null
                 }
             }
         }

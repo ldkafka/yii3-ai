@@ -2,7 +2,7 @@
     "scenario": "tool_call",
     "provider": "anthropic",
     "model": "claude-haiku-5-5",
-    "recordedAt": "2026-10-12T16:41:41Z",
+    "recordedAt": "2026-10-12T17:38:30Z",
     "synthetic": false,
     "exchanges": [
         {
@@ -56,17 +56,17 @@
                 "status": 200,
                 "headers": {
                     "content-type": "application/json",
-                    "request-id": "req_011CfxgAVBX6KKt5TfWpAoE3"
+                    "request-id": "req_011CfxkVnXoTCpEEViQNkkSr"
                 },
                 "body": {
                     "model": "claude-haiku-5-5",
-                    "id": "msg_011CfxgAVXs3i7mnFccJ97wY",
+                    "id": "msg_011CfxkVnrtgdUeqDcP5KnZ2",
                     "type": "message",
                     "role": "assistant",
                     "content": [
                         {
                             "type": "tool_use",
-                            "id": "toolu_01SsdC7hx8iVXmpWZ3URQCDh",
+                            "id": "toolu_012BmABRTRzac9jymadjSgr5",
                             "name": "get_weather",
                             "input": {
                                 "city": "Paris"
