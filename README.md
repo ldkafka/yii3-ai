@@ -9,7 +9,7 @@ One request and response format for AI model APIs, in plain PHP 8.3+ with a thin
 No vendor SDKs: the runtime needs `ext-curl`, `ext-json` and `psr/log`.
 
 - Requests, messages, tool calls, results, stop reasons and usage have one shape for every provider.
-  v0.1 ships the Anthropic Messages API adapter; more adapters follow (see the CHANGELOG).
+  v0.1 ships the Anthropic Messages API adapter; more adapters follow (see [ROADMAP.md](ROADMAP.md)).
 - Every model a request names is in a catalog with its capabilities and price. A request that needs
   a capability the model lacks fails before any HTTP call.
 - Every response carries usage, a cost estimate at list price and the latency.
@@ -17,7 +17,8 @@ No vendor SDKs: the runtime needs `ext-curl`, `ext-json` and `psr/log`.
   and a context window policy.
 - A client for tools on remote MCP servers.
 
-Status: 0.x. A minor release may change the API; the CHANGELOG says how.
+Status: 0.1, Anthropic only for now. The API may change before 1.0 (the CHANGELOG says how). The conformance
+fixtures are hand-written until they are re-recorded from the live API. Plans: [ROADMAP.md](ROADMAP.md).
 
 ## Installation
 

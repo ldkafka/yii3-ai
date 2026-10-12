@@ -11,7 +11,7 @@ use Yiisoft\Db\Migration\RevertibleMigrationInterface;
  * Creates `{{%ai_message}}` for DbConversationStore. Not registered automatically: add
  * `Ldkafka\Ai\Migration` to `params['yiisoft/db-migration']['sourceNamespaces']` to use it.
  */
-final class M261020000000CreateAiMessageTable implements RevertibleMigrationInterface
+final class M261012000000CreateAiMessageTable implements RevertibleMigrationInterface
 {
     public const TABLE = '{{%ai_message}}';
 

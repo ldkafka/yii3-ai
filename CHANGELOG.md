@@ -5,7 +5,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 [Semantic Versioning](https://semver.org/). In 0.x a minor release may break the API; such a release
 has a "Backwards compatibility" section. Patch releases never do.
 
-## [0.1.0] - Unreleased
+## [0.1.0] - 2026-10-12
 
 ### Added
 - One provider-neutral format: `Request`, `Response`, `Message` with typed parts (`Text`, `Image`,
@@ -26,7 +26,7 @@ has a "Backwards compatibility" section. Patch releases never do.
 - Keys and tokens are `#[\SensitiveParameter]` (the transport request too) and redacted in debug dumps.
 - `ToolInterface`, `ToolSpec`, `ToolChoice`, `ToolRegistry`.
 - Conversations: `Chat`, `InMemoryConversationStore`, `DbConversationStore` (yiisoft/db) and the
-  migration `M261020000000CreateAiMessageTable`; context policies `FullReplay` and
+  migration `M261012000000CreateAiMessageTable`; context policies `FullReplay` and
   `TokenBudgetWindow` with `HeuristicTokenEstimator`.
 - Remote MCP tools: `McpHttpClient` (Streamable HTTP, `initialize` handshake, sessions, JSON and
   event-stream answers, cursor pages), `RemoteMcpTool` and `RemoteMcpToolSource`.

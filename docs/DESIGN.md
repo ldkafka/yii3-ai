@@ -84,7 +84,7 @@ yii3-ai/
 │   │              TransportException ContextOverflowException ToolException McpException
 │   ├── Mcp/       McpHttpClient RemoteMcpTool RemoteMcpToolSource (§5.10)
 │   ├── Internal/  Json (@internal: JSON encode/decode that keeps empty objects as {})
-│   └── Migration/ M261020000000CreateAiMessageTable
+│   └── Migration/ M261012000000CreateAiMessageTable
 ├── tests/         Unit/ (one class per src class)   Support/ (FixtureTransport RecordingTransport FakeProvider echo-server.php)
 │                  Conformance/ (ConformanceTestCase AnthropicConformanceTest fixtures/anthropic/*.json)
 │                  Mcp/ (McpConformanceTest fixtures/mcp/*.json)
@@ -675,7 +675,7 @@ The store is the source of truth; provider-side state is never relied on in v0.1
 
 Keep `system` and the tool set fixed per conversation: changing them also invalidates replayed thinking on Claude 5.
 
-### 8.3 Table `{{%ai_message}}` (migration `Ldkafka\Ai\Migration\M261020000000CreateAiMessageTable`)
+### 8.3 Table `{{%ai_message}}` (migration `Ldkafka\Ai\Migration\M261012000000CreateAiMessageTable`)
 
 A yiisoft/db-migration `RevertibleMigrationInterface`, columns built with `$b->columnBuilder()`:
 

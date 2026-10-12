@@ -19,7 +19,7 @@ use function sprintf;
 
 /**
  * Conversations in a database table through yiisoft/db (the table of
- * {@see \Ldkafka\Ai\Migration\M261020000000CreateAiMessageTable}). Needs yiisoft/db, which this
+ * {@see \Ldkafka\Ai\Migration\M261012000000CreateAiMessageTable}). Needs yiisoft/db, which this
  * package only suggests.
  */
 final class DbConversationStore implements ConversationStoreInterface

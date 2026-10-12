@@ -10,7 +10,7 @@ use Ldkafka\Ai\Message\Message;
 use Ldkafka\Ai\Message\Thinking;
 use Ldkafka\Ai\Message\ToolCall;
 use Ldkafka\Ai\Message\ToolResult;
-use Ldkafka\Ai\Migration\M261020000000CreateAiMessageTable;
+use Ldkafka\Ai\Migration\M261012000000CreateAiMessageTable;
 use Ldkafka\Ai\Response;
 use Ldkafka\Ai\StopReason;
 use Ldkafka\Ai\Usage;
@@ -37,7 +37,7 @@ final class DbConversationStoreTest extends TestCase
     {
         $this->db = new Connection(new Driver('sqlite::memory:'), new SchemaCache(new ArrayCache()));
         $this->builder = new MigrationBuilder($this->db, new NullMigrationInformer());
-        (new M261020000000CreateAiMessageTable())->up($this->builder);
+        (new M261012000000CreateAiMessageTable())->up($this->builder);
     }
 
     public function testRoundTripKeepsPartsOrderAndAccounting(): void
@@ -102,7 +102,7 @@ final class DbConversationStoreTest extends TestCase
     {
         self::assertNotNull($this->db->getTableSchema('ai_message', true));
 
-        (new M261020000000CreateAiMessageTable())->down($this->builder);
+        (new M261012000000CreateAiMessageTable())->down($this->builder);
 
         self::assertNull($this->db->getTableSchema('ai_message', true));
     }
