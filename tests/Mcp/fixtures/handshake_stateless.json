@@ -1,0 +1,234 @@
+{
+    "scenario": "handshake_stateless",
+    "provider": "mcp",
+    "recordedAt": "2026-10-12T00:00:00Z",
+    "synthetic": true,
+    "exchanges": [
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "initialize",
+                    "params": {
+                        "protocolVersion": "2025-11-25",
+                        "capabilities": {},
+                        "clientInfo": {
+                            "name": "ldkafka-yii3-ai",
+                            "version": "0.1.0"
+                        }
+                    }
+                },
+                "absentHeaders": [
+                    "mcp-protocol-version",
+                    "mcp-session-id"
+                ]
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "protocolVersion": "2025-06-18",
+                        "capabilities": {
+                            "tools": {
+                                "listChanged": false
+                            }
+                        },
+                        "serverInfo": {
+                            "name": "aura-mcp",
+                            "version": "1.2.0"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0",
+                    "mcp-protocol-version": "2025-06-18"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "method": "notifications/initialized"
+                },
+                "absentHeaders": [
+                    "mcp-session-id"
+                ]
+            },
+            "response": {
+                "status": 202,
+                "headers": {},
+                "bodyText": ""
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0",
+                    "mcp-protocol-version": "2025-06-18"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 2,
+                    "method": "tools/list",
+                    "params": {}
+                },
+                "absentHeaders": [
+                    "mcp-session-id"
+                ]
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 2,
+                    "result": {
+                        "tools": [
+                            {
+                                "name": "prod_check",
+                                "description": "What happened since a time, in one call.",
+                                "inputSchema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "since": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "since"
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "app_logs",
+                                "description": "Application log files.",
+                                "inputSchema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            },
+                            {
+                                "name": "logs.read",
+                                "description": "A name with a dot.",
+                                "inputSchema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0",
+                    "mcp-protocol-version": "2025-06-18"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 3,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "prod_check",
+                        "arguments": {
+                            "since": "06:00"
+                        }
+                    }
+                },
+                "absentHeaders": []
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 3,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "All quiet since 06:00."
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0",
+                    "mcp-protocol-version": "2025-06-18"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 4,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "app_logs",
+                        "arguments": {}
+                    }
+                },
+                "absentHeaders": []
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 4,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "line 1"
+                            },
+                            {
+                                "type": "text",
+                                "text": "line 2"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

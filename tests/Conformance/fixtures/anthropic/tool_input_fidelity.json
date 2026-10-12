@@ -1,0 +1,122 @@
+{
+    "scenario": "tool_input_fidelity",
+    "provider": "anthropic",
+    "model": "claude-haiku-5-5",
+    "recordedAt": "2026-10-12T00:00:00Z",
+    "synthetic": true,
+    "exchanges": [
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/messages",
+                "headers": {
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                "body": {
+                    "model": "claude-haiku-5-5",
+                    "max_tokens": 1024,
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": "Run the saved search, then search for x."
+                                }
+                            ]
+                        },
+                        {
+                            "role": "assistant",
+                            "content": [
+                                {
+                                    "type": "tool_use",
+                                    "id": "toolu_01Fidelity",
+                                    "name": "search",
+                                    "input": {
+                                        "q": "saved",
+                                        "filters": {},
+                                        "options": {
+                                            "nested": {}
+                                        },
+                                        "tags": []
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "tool_result",
+                                    "tool_use_id": "toolu_01Fidelity",
+                                    "content": "0 results"
+                                }
+                            ]
+                        }
+                    ],
+                    "tools": [
+                        {
+                            "name": "search",
+                            "description": "Search records.",
+                            "input_schema": {
+                                "type": "object",
+                                "properties": {
+                                    "q": {
+                                        "type": "string"
+                                    },
+                                    "filters": {
+                                        "type": "object"
+                                    },
+                                    "options": {
+                                        "type": "object"
+                                    },
+                                    "tags": {
+                                        "type": "array"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "tool_choice": {
+                        "type": "tool",
+                        "name": "search"
+                    }
+                }
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "request-id": "req_011CSynthetic0015",
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "id": "msg_01Synthetic0015",
+                    "type": "message",
+                    "role": "assistant",
+                    "model": "claude-haiku-5-5",
+                    "content": [
+                        {
+                            "type": "tool_use",
+                            "id": "toolu_01F2",
+                            "name": "search",
+                            "input": {
+                                "q": "x",
+                                "opts": {}
+                            }
+                        }
+                    ],
+                    "stop_reason": "tool_use",
+                    "stop_sequence": null,
+                    "usage": {
+                        "input_tokens": 25,
+                        "output_tokens": 12,
+                        "cache_creation_input_tokens": 0,
+                        "cache_read_input_tokens": 0
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,148 @@
+{
+    "scenario": "event_stream_and_cursor",
+    "provider": "mcp",
+    "recordedAt": "2026-10-12T00:00:00Z",
+    "synthetic": true,
+    "exchanges": [
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "initialize",
+                    "params": {
+                        "protocolVersion": "2025-11-25",
+                        "capabilities": {},
+                        "clientInfo": {
+                            "name": "ldkafka-yii3-ai",
+                            "version": "0.1.0"
+                        }
+                    }
+                },
+                "absentHeaders": [
+                    "mcp-protocol-version"
+                ]
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "protocolVersion": "2025-06-18",
+                        "capabilities": {
+                            "tools": {
+                                "listChanged": false
+                            }
+                        },
+                        "serverInfo": {
+                            "name": "aura-mcp",
+                            "version": "1.2.0"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0",
+                    "mcp-protocol-version": "2025-06-18"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "method": "notifications/initialized"
+                },
+                "absentHeaders": []
+            },
+            "response": {
+                "status": 202,
+                "headers": {},
+                "bodyText": ""
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0",
+                    "mcp-protocol-version": "2025-06-18"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 2,
+                    "method": "tools/list",
+                    "params": {}
+                },
+                "absentHeaders": []
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "content-type": "text/event-stream"
+                },
+                "bodyText": "id: ev-0\r\ndata: \r\n\r\nevent: message\r\ndata: {\"jsonrpc\":\"2.0\",\"method\":\"notifications/progress\",\"params\":{\"progress\":1}}\r\n\r\nevent: message\r\nid: ev-2\r\ndata: {\"jsonrpc\":\"2.0\",\"id\":2,\r\ndata: \"result\":{\"tools\":[{\"name\": \"prod_check\", \"description\": \"What happened since a time, in one call.\", \"inputSchema\": {\"type\": \"object\", \"properties\": {\"since\": {\"type\": \"string\"}}, \"required\": [\"since\"]}}],\"nextCursor\":\"page-2\"}}\r\n\r\n"
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0",
+                    "mcp-protocol-version": "2025-06-18"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 3,
+                    "method": "tools/list",
+                    "params": {
+                        "cursor": "page-2"
+                    }
+                },
+                "absentHeaders": []
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 3,
+                    "result": {
+                        "tools": [
+                            {
+                                "name": "app_logs",
+                                "description": "Application log files.",
+                                "inputSchema": {
+                                    "type": "object",
+                                    "properties": {}
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}

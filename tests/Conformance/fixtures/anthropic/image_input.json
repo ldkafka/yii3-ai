@@ -1,0 +1,77 @@
+{
+    "scenario": "image_input",
+    "provider": "anthropic",
+    "model": "claude-haiku-5-5",
+    "recordedAt": "2026-10-12T00:00:00Z",
+    "synthetic": true,
+    "exchanges": [
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/messages",
+                "headers": {
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                "body": {
+                    "model": "claude-haiku-5-5",
+                    "max_tokens": 1024,
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": "Describe the two images in a few words."
+                                },
+                                {
+                                    "type": "image",
+                                    "source": {
+                                        "type": "base64",
+                                        "media_type": "image/png",
+                                        "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg=="
+                                    }
+                                },
+                                {
+                                    "type": "image",
+                                    "source": {
+                                        "type": "url",
+                                        "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "request-id": "req_011CSynthetic0006",
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "id": "msg_01Synthetic0006",
+                    "type": "message",
+                    "role": "assistant",
+                    "model": "claude-haiku-5-5",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "A red pixel and two dice on a checkerboard."
+                        }
+                    ],
+                    "stop_reason": "end_turn",
+                    "stop_sequence": null,
+                    "usage": {
+                        "input_tokens": 1650,
+                        "output_tokens": 14,
+                        "cache_creation_input_tokens": 0,
+                        "cache_read_input_tokens": 0
+                    }
+                }
+            }
+        }
+    ]
+}

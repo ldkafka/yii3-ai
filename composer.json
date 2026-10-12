@@ -1,0 +1,84 @@
+{
+    "name": "ldkafka/yii3-ai",
+    "type": "library",
+    "description": "One request and response format for AI model APIs in PHP 8 / Yii3, without vendor SDKs: an Anthropic Messages adapter, a bounded tool loop, conversation stores, cost accounting and a client for remote MCP tools",
+    "keywords": [
+        "ai",
+        "llm",
+        "claude",
+        "anthropic",
+        "tool-use",
+        "mcp",
+        "model-context-protocol",
+        "yii3",
+        "psr-3"
+    ],
+    "homepage": "https://github.com/ldkafka/yii3-ai",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/ldkafka/yii3-ai/issues",
+        "source": "https://github.com/ldkafka/yii3-ai"
+    },
+    "authors": [
+        {
+            "name": "ldkafka",
+            "homepage": "https://github.com/ldkafka"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "psr/log": "^1.1 || ^2.0 || ^3.0"
+    },
+    "require-dev": {
+        "nyholm/psr7": "^1.8",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^11.5 || ^12.0",
+        "psr/http-client": "^1.0",
+        "psr/http-factory": "^1.0",
+        "yiisoft/cache": "^3.0",
+        "yiisoft/db": "^2.0",
+        "yiisoft/db-migration": "^2.0",
+        "yiisoft/db-sqlite": "^2.0",
+        "yiisoft/di": "^1.2"
+    },
+    "suggest": {
+        "yiisoft/config": "Wires the client, the Runner and Chat from params in Yii3 applications",
+        "yiisoft/db": "Needed by DbConversationStore (^2.0)",
+        "yiisoft/db-migration": "Creates the ai_message table for DbConversationStore",
+        "psr/http-client": "Needed by Psr18Transport, with psr/http-factory",
+        "ldkafka/yii3-mcp-server": "Serve the same tools over MCP"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ldkafka\\Ai\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ldkafka\\Ai\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpstan": "phpstan analyse --no-progress"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "0.1.x-dev"
+        },
+        "config-plugin-options": {
+            "source-directory": "config"
+        },
+        "config-plugin": {
+            "params": "params.php",
+            "di": "di.php"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

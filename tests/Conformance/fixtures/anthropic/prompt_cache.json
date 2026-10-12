@@ -1,0 +1,100 @@
+{
+    "scenario": "prompt_cache",
+    "provider": "anthropic",
+    "model": "claude-haiku-5-5",
+    "recordedAt": "2026-10-12T00:00:00Z",
+    "synthetic": true,
+    "exchanges": [
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/messages",
+                "headers": {
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                "body": {
+                    "model": "claude-haiku-5-5",
+                    "max_tokens": 1024,
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": "Summarise the policy in one sentence."
+                                }
+                            ]
+                        }
+                    ],
+                    "system": [
+                        {
+                            "type": "text",
+                            "text": "You are a support agent. Policy: guests may cancel up to 14 days before arrival for a full refund.",
+                            "cache_control": {
+                                "type": "ephemeral"
+                            }
+                        }
+                    ],
+                    "tools": [
+                        {
+                            "name": "get_weather",
+                            "description": "Current weather for a city.",
+                            "input_schema": {
+                                "type": "object",
+                                "properties": {
+                                    "city": {
+                                        "type": "string",
+                                        "description": "City name"
+                                    }
+                                },
+                                "required": [
+                                    "city"
+                                ]
+                            },
+                            "cache_control": {
+                                "type": "ephemeral",
+                                "ttl": "1h"
+                            }
+                        }
+                    ],
+                    "cache_control": {
+                        "type": "ephemeral"
+                    }
+                }
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "request-id": "req_011CSynthetic0018",
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "id": "msg_01Synthetic0018",
+                    "type": "message",
+                    "role": "assistant",
+                    "model": "claude-haiku-5-5",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "Guests get a full refund if they cancel at least 14 days before arrival."
+                        }
+                    ],
+                    "stop_reason": "end_turn",
+                    "stop_sequence": null,
+                    "usage": {
+                        "input_tokens": 20,
+                        "cache_read_input_tokens": 1800,
+                        "cache_creation_input_tokens": 2400,
+                        "cache_creation": {
+                            "ephemeral_5m_input_tokens": 400,
+                            "ephemeral_1h_input_tokens": 2000
+                        },
+                        "output_tokens": 50
+                    }
+                }
+            }
+        }
+    ]
+}

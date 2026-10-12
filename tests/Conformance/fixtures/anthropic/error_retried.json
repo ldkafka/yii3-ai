@@ -1,0 +1,269 @@
+{
+    "scenario": "error_retried",
+    "provider": "anthropic",
+    "model": "claude-haiku-5-5",
+    "recordedAt": "2026-10-12T00:00:00Z",
+    "synthetic": true,
+    "live": false,
+    "exchanges": [
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/messages",
+                "headers": {
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                "body": {
+                    "model": "claude-haiku-5-5",
+                    "max_tokens": 1024,
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": "Say hello."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "response": {
+                "status": 429,
+                "headers": {
+                    "request-id": "req_011CSynthetic0023",
+                    "content-type": "application/json",
+                    "retry-after": "1"
+                },
+                "body": {
+                    "type": "error",
+                    "error": {
+                        "type": "rate_limit_error",
+                        "message": "Number of request tokens has exceeded your per-minute rate limit."
+                    },
+                    "request_id": "req_011CSynthetic0023"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/messages",
+                "headers": {
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                "body": {
+                    "model": "claude-haiku-5-5",
+                    "max_tokens": 1024,
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": "Say hello."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "response": {
+                "status": 529,
+                "headers": {
+                    "request-id": "req_011CSynthetic0024",
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "type": "error",
+                    "error": {
+                        "type": "overloaded_error",
+                        "message": "Overloaded"
+                    },
+                    "request_id": "req_011CSynthetic0024"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/messages",
+                "headers": {
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                "body": {
+                    "model": "claude-haiku-5-5",
+                    "max_tokens": 1024,
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": "Say hello."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "request-id": "req_011CSynthetic0025",
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "id": "msg_01Synthetic0025",
+                    "type": "message",
+                    "role": "assistant",
+                    "model": "claude-haiku-5-5",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "Hello!"
+                        }
+                    ],
+                    "stop_reason": "end_turn",
+                    "stop_sequence": null,
+                    "usage": {
+                        "input_tokens": 25,
+                        "output_tokens": 12,
+                        "cache_creation_input_tokens": 0,
+                        "cache_read_input_tokens": 0
+                    }
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/messages",
+                "headers": {
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                "body": {
+                    "model": "claude-haiku-5-5",
+                    "max_tokens": 1024,
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": "Say hello."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "response": {
+                "status": 500,
+                "headers": {
+                    "request-id": "req_011CSynthetic0026",
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "type": "error",
+                    "error": {
+                        "type": "api_error",
+                        "message": "Internal server error"
+                    },
+                    "request_id": "req_011CSynthetic0026"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/messages",
+                "headers": {
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                "body": {
+                    "model": "claude-haiku-5-5",
+                    "max_tokens": 1024,
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": "Say hello."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "response": {
+                "status": 500,
+                "headers": {
+                    "request-id": "req_011CSynthetic0027",
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "type": "error",
+                    "error": {
+                        "type": "api_error",
+                        "message": "Internal server error"
+                    },
+                    "request_id": "req_011CSynthetic0027"
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/messages",
+                "headers": {
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                "body": {
+                    "model": "claude-haiku-5-5",
+                    "max_tokens": 1024,
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": "Say hello."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "response": {
+                "status": 500,
+                "headers": {
+                    "request-id": "req_011CSynthetic0028",
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "type": "error",
+                    "error": {
+                        "type": "api_error",
+                        "message": "Internal server error"
+                    },
+                    "request_id": "req_011CSynthetic0028"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,204 @@
+{
+    "scenario": "tool_errors",
+    "provider": "mcp",
+    "recordedAt": "2026-10-12T00:00:00Z",
+    "synthetic": true,
+    "exchanges": [
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "initialize",
+                    "params": {
+                        "protocolVersion": "2025-11-25",
+                        "capabilities": {},
+                        "clientInfo": {
+                            "name": "ldkafka-yii3-ai",
+                            "version": "0.1.0"
+                        }
+                    }
+                },
+                "absentHeaders": [
+                    "mcp-protocol-version"
+                ]
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "protocolVersion": "2025-06-18",
+                        "capabilities": {
+                            "tools": {
+                                "listChanged": false
+                            }
+                        },
+                        "serverInfo": {
+                            "name": "aura-mcp",
+                            "version": "1.2.0"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0",
+                    "mcp-protocol-version": "2025-06-18"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "method": "notifications/initialized"
+                },
+                "absentHeaders": []
+            },
+            "response": {
+                "status": 202,
+                "headers": {},
+                "bodyText": ""
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0",
+                    "mcp-protocol-version": "2025-06-18"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 2,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "prod_check",
+                        "arguments": {
+                            "since": "x"
+                        }
+                    }
+                },
+                "absentHeaders": []
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 2,
+                    "result": {
+                        "isError": true,
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Query failed: table not found"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0",
+                    "mcp-protocol-version": "2025-06-18"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 3,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "prod_check",
+                        "arguments": {
+                            "since": 5
+                        }
+                    }
+                },
+                "absentHeaders": []
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 3,
+                    "error": {
+                        "code": -32602,
+                        "message": "Arguments for tool \"prod_check\" are invalid: since must be a string.",
+                        "data": {
+                            "tool": "prod_check",
+                            "violations": [
+                                "since must be a string."
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0",
+                    "mcp-protocol-version": "2025-06-18"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 4,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "prod_check",
+                        "arguments": {
+                            "since": "06:00"
+                        }
+                    }
+                },
+                "absentHeaders": []
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 4,
+                    "error": {
+                        "code": -32603,
+                        "message": "Internal error"
+                    }
+                }
+            }
+        }
+    ]
+}

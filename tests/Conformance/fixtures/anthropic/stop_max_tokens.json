@@ -1,0 +1,62 @@
+{
+    "scenario": "stop_max_tokens",
+    "provider": "anthropic",
+    "model": "claude-haiku-5-5",
+    "recordedAt": "2026-10-12T00:00:00Z",
+    "synthetic": true,
+    "exchanges": [
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/messages",
+                "headers": {
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                "body": {
+                    "model": "claude-haiku-5-5",
+                    "max_tokens": 5,
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": "Count from 1 to 200, separated by commas."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "request-id": "req_011CSynthetic0004",
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "id": "msg_01Synthetic0004",
+                    "type": "message",
+                    "role": "assistant",
+                    "model": "claude-haiku-5-5",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "1, 2, 3"
+                        }
+                    ],
+                    "stop_reason": "max_tokens",
+                    "stop_sequence": null,
+                    "usage": {
+                        "input_tokens": 25,
+                        "output_tokens": 12,
+                        "cache_creation_input_tokens": 0,
+                        "cache_read_input_tokens": 0
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,186 @@
+{
+    "scenario": "content_types",
+    "provider": "mcp",
+    "recordedAt": "2026-10-12T00:00:00Z",
+    "synthetic": true,
+    "exchanges": [
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "initialize",
+                    "params": {
+                        "protocolVersion": "2025-11-25",
+                        "capabilities": {},
+                        "clientInfo": {
+                            "name": "ldkafka-yii3-ai",
+                            "version": "0.1.0"
+                        }
+                    }
+                },
+                "absentHeaders": [
+                    "mcp-protocol-version"
+                ]
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "result": {
+                        "protocolVersion": "2025-06-18",
+                        "capabilities": {
+                            "tools": {
+                                "listChanged": false
+                            }
+                        },
+                        "serverInfo": {
+                            "name": "aura-mcp",
+                            "version": "1.2.0"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0",
+                    "mcp-protocol-version": "2025-06-18"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "method": "notifications/initialized"
+                },
+                "absentHeaders": []
+            },
+            "response": {
+                "status": 202,
+                "headers": {},
+                "bodyText": ""
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0",
+                    "mcp-protocol-version": "2025-06-18"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 2,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "chart",
+                        "arguments": {}
+                    }
+                },
+                "absentHeaders": []
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 2,
+                    "result": {
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": "Bookings per day:"
+                            },
+                            {
+                                "type": "image",
+                                "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg==",
+                                "mimeType": "image/png"
+                            },
+                            {
+                                "type": "image",
+                                "data": "PHN2Zz48L3N2Zz4=",
+                                "mimeType": "image/svg+xml"
+                            },
+                            {
+                                "type": "audio",
+                                "data": "AAAA",
+                                "mimeType": "audio/wav"
+                            },
+                            {
+                                "type": "resource",
+                                "resource": {
+                                    "uri": "file:///report.txt",
+                                    "mimeType": "text/plain",
+                                    "text": "Report body"
+                                }
+                            },
+                            {
+                                "type": "resource_link",
+                                "uri": "file:///big.csv",
+                                "name": "big.csv"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/mcp",
+                "headers": {
+                    "content-type": "application/json",
+                    "accept": "application/json, text/event-stream",
+                    "user-agent": "watch-test/1.0",
+                    "mcp-protocol-version": "2025-06-18"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 3,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "stats",
+                        "arguments": {}
+                    }
+                },
+                "absentHeaders": []
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "jsonrpc": "2.0",
+                    "id": 3,
+                    "result": {
+                        "content": [],
+                        "structuredContent": {
+                            "bookings": 12,
+                            "filters": {}
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,199 @@
+{
+    "scenario": "thinking_roundtrip",
+    "provider": "anthropic",
+    "model": "claude-haiku-5-5",
+    "recordedAt": "2026-10-12T00:00:00Z",
+    "synthetic": true,
+    "exchanges": [
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/messages",
+                "headers": {
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                "body": {
+                    "model": "claude-haiku-5-5",
+                    "max_tokens": 2048,
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": "What is the weather in Paris? Think first."
+                                }
+                            ]
+                        }
+                    ],
+                    "tools": [
+                        {
+                            "name": "get_weather",
+                            "description": "Current weather for a city.",
+                            "input_schema": {
+                                "type": "object",
+                                "properties": {
+                                    "city": {
+                                        "type": "string",
+                                        "description": "City name"
+                                    }
+                                },
+                                "required": [
+                                    "city"
+                                ]
+                            }
+                        }
+                    ],
+                    "tool_choice": {
+                        "type": "auto"
+                    }
+                }
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "request-id": "req_011CSynthetic0016",
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "id": "msg_01Synthetic0016",
+                    "type": "message",
+                    "role": "assistant",
+                    "model": "claude-haiku-5-5",
+                    "content": [
+                        {
+                            "type": "thinking",
+                            "thinking": "The user wants the weather in Paris; call get_weather.",
+                            "signature": "sig-abc123"
+                        },
+                        {
+                            "type": "redacted_thinking",
+                            "data": "redacted-xyz789"
+                        },
+                        {
+                            "type": "tool_use",
+                            "id": "toolu_01T",
+                            "name": "get_weather",
+                            "input": {
+                                "city": "Paris"
+                            }
+                        }
+                    ],
+                    "stop_reason": "tool_use",
+                    "stop_sequence": null,
+                    "usage": {
+                        "input_tokens": 25,
+                        "output_tokens": 12,
+                        "cache_creation_input_tokens": 0,
+                        "cache_read_input_tokens": 0
+                    }
+                }
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "path": "/v1/messages",
+                "headers": {
+                    "anthropic-version": "2023-06-01",
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                "body": {
+                    "model": "claude-haiku-5-5",
+                    "max_tokens": 2048,
+                    "messages": [
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": "What is the weather in Paris? Think first."
+                                }
+                            ]
+                        },
+                        {
+                            "role": "assistant",
+                            "content": [
+                                {
+                                    "type": "thinking",
+                                    "thinking": "The user wants the weather in Paris; call get_weather.",
+                                    "signature": "sig-abc123"
+                                },
+                                {
+                                    "type": "redacted_thinking",
+                                    "data": "redacted-xyz789"
+                                },
+                                {
+                                    "type": "tool_use",
+                                    "id": "toolu_01T",
+                                    "name": "get_weather",
+                                    "input": {
+                                        "city": "Paris"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "tool_result",
+                                    "tool_use_id": "toolu_01T",
+                                    "content": "18 degrees and sunny"
+                                }
+                            ]
+                        }
+                    ],
+                    "tools": [
+                        {
+                            "name": "get_weather",
+                            "description": "Current weather for a city.",
+                            "input_schema": {
+                                "type": "object",
+                                "properties": {
+                                    "city": {
+                                        "type": "string",
+                                        "description": "City name"
+                                    }
+                                },
+                                "required": [
+                                    "city"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "request-id": "req_011CSynthetic0017",
+                    "content-type": "application/json"
+                },
+                "body": {
+                    "id": "msg_01Synthetic0017",
+                    "type": "message",
+                    "role": "assistant",
+                    "model": "claude-haiku-5-5",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "It is 18 degrees and sunny in Paris."
+                        }
+                    ],
+                    "stop_reason": "end_turn",
+                    "stop_sequence": null,
+                    "usage": {
+                        "input_tokens": 25,
+                        "output_tokens": 12,
+                        "cache_creation_input_tokens": 0,
+                        "cache_read_input_tokens": 0
+                    }
+                }
+            }
+        }
+    ]
+}
