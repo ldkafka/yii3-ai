@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ldkafka\Ai\Http;
 
+use Closure;
 use CurlHandle;
 use Ldkafka\Ai\Exception\TransportException;
 
@@ -28,6 +29,7 @@ use function trim;
 /**
  * The default transport: ext-curl on one reused handle, so the TLS connection stays open between
  * calls. TLS verification on, TCP keep-alive on, no redirects. Timeouts in seconds, per request.
+ * An optional abort callback cancels a request in flight.
  */
 final class CurlTransport implements TransportInterface
 {
@@ -36,9 +38,14 @@ final class CurlTransport implements TransportInterface
     /**
      * @param float $timeout Whole-request timeout in seconds.
      * @param float $connectTimeout Connect timeout in seconds.
+     * @param (Closure(): bool)|null $abort Called while a request runs (about once a second, idle or
+     *     not); returning true cancels it with a TransportException whose isCancelled() is true.
      */
-    public function __construct(private float $timeout = 600.0, private float $connectTimeout = 10.0)
-    {
+    public function __construct(
+        private float $timeout = 600.0,
+        private float $connectTimeout = 10.0,
+        private ?Closure $abort = null,
+    ) {
     }
 
     /**
@@ -88,6 +95,11 @@ final class CurlTransport implements TransportInterface
         if ($request->body !== '') {
             $options[CURLOPT_POSTFIELDS] = $request->body;
         }
+        if ($this->abort !== null) {
+            $abort = $this->abort;
+            $options[CURLOPT_NOPROGRESS] = false;
+            $options[CURLOPT_XFERINFOFUNCTION] = static fn($curl, int $downTotal, int $down, int $upTotal, int $up): int => $abort() ? 1 : 0;
+        }
         curl_setopt_array($handle, $options);
 
         $body = curl_exec($handle);
@@ -102,7 +114,12 @@ final class CurlTransport implements TransportInterface
             $message = sprintf('HTTP request to %s failed: %s (curl %d)', self::safeUrl($request->url), curl_error($handle), $errno);
             $this->handle = null;
 
-            throw new TransportException($message, $errno === CURLE_OPERATION_TIMEDOUT && $sent, $sent);
+            throw new TransportException(
+                $message,
+                $errno === CURLE_OPERATION_TIMEDOUT && $sent,
+                $sent,
+                cancelled: $errno === CURLE_ABORTED_BY_CALLBACK,
+            );
         }
 
         /** @var array<string, string> $responseHeaders */

@@ -36,7 +36,7 @@ use function substr;
  */
 final class Client
 {
-    public const VERSION = '0.1.1';
+    public const VERSION = '0.1.2';
 
     /**
      * @param ModelCatalog $models The configured models.

@@ -20,7 +20,7 @@ use function mt_rand;
  * Retried: rate limits that carry retry-after, overloaded, server errors, provider timeouts
  * (408, 504) and connection failures before the request was sent. Not retried: a 429 without
  * retry-after (the spend cap), a read timeout or a connection dropped after the request was sent
- * (the call may have run and been billed), and every other error. A retry-after
+ * (the call may have run and been billed), a call the caller cancelled, and every other error. A retry-after
  * longer than $maxRetryAfterSeconds is not waited out: the exception surfaces with retryAfter set.
  */
 final readonly class RetryPolicy
@@ -49,7 +49,8 @@ final readonly class RetryPolicy
         }
 
         if ($error instanceof TransportException) {
-            return $error->isAfterSend() ? null : $this->backoff($retry);
+            // Cancelled first: a cancel before the request was sent is not after-send either.
+            return $error->isCancelled() || $error->isAfterSend() ? null : $this->backoff($retry);
         }
         if (!$error instanceof ProviderException) {
             return null;

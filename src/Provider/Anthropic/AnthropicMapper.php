@@ -38,7 +38,6 @@ use function array_key_last;
 use function count;
 use function function_exists;
 use function is_array;
-use function is_numeric;
 use function is_string;
 use function mb_substr;
 use function preg_replace;
@@ -202,7 +201,7 @@ final class AnthropicMapper
             $requestId ??= Json::string($data, 'request_id');
         }
         $message ??= self::snippet($response->body);
-        $retryAfter = self::retryAfter($response->header('retry-after'));
+        $retryAfter = $response->retryAfter();
 
         $kind = match (true) {
             $status === 529 || $errorType === 'overloaded_error' => ErrorKind::Overloaded,
@@ -504,19 +503,6 @@ final class AnthropicMapper
         }
 
         return $out;
-    }
-
-    /**
-     * Seconds from a numeric retry-after header; null otherwise.
-     */
-    private static function retryAfter(?string $value): ?float
-    {
-        if ($value === null || !is_numeric(trim($value))) {
-            return null;
-        }
-        $seconds = (float) trim($value);
-
-        return $seconds >= 0 ? $seconds : null;
     }
 
     /**

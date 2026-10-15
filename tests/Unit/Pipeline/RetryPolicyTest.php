@@ -32,6 +32,7 @@ final class RetryPolicyTest extends TestCase
         yield 'invalid response' => [self::provider(ErrorKind::InvalidResponse, 200), false];
         yield 'connection failure' => [new TransportException('refused'), true];
         yield 'read timeout' => [new TransportException('timed out', true), false];
+        yield 'cancelled before send' => [new TransportException('cancelled', cancelled: true), false];
         yield 'configuration' => [new ConfigurationException('x'), false];
     }
 

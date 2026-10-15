@@ -7,8 +7,8 @@ namespace Ldkafka\Ai\Exception;
 use Throwable;
 
 /**
- * The HTTP exchange failed: DNS, TLS, connect, a timeout or a dropped connection. The message names
- * only the URL.
+ * The HTTP exchange failed: DNS, TLS, connect, a timeout, a dropped connection or a cancel by the
+ * caller. The message names only the URL.
  */
 final class TransportException extends AiException
 {
@@ -17,12 +17,14 @@ final class TransportException extends AiException
      * @param bool $timeout Whether the request was sent and the answer timed out.
      * @param bool $afterSend Whether the request was sent before the exchange failed.
      * @param Throwable|null $previous The cause.
+     * @param bool $cancelled Whether the caller cancelled the request (the transport's abort callback).
      */
     public function __construct(
         string $message,
         private readonly bool $timeout = false,
         private readonly bool $afterSend = false,
         ?Throwable $previous = null,
+        private readonly bool $cancelled = false,
     ) {
         parent::__construct($message, 0, $previous);
     }
@@ -43,5 +45,13 @@ final class TransportException extends AiException
     public function isAfterSend(): bool
     {
         return $this->afterSend || $this->timeout;
+    }
+
+    /**
+     * Whether the caller cancelled the request. A cancelled call is never retried.
+     */
+    public function isCancelled(): bool
+    {
+        return $this->cancelled;
     }
 }

@@ -8,12 +8,14 @@ use Ldkafka\Ai\Exception\TransportException;
 use Ldkafka\Ai\Http\CurlTransport;
 use Ldkafka\Ai\Http\HttpRequest;
 use Ldkafka\Ai\Internal\Json;
+use Ldkafka\Ai\Pipeline\RetryPolicy;
 use PHPUnit\Framework\TestCase;
 
 use function fclose;
 use function fsockopen;
 use function is_array;
 use function is_resource;
+use function microtime;
 use function proc_open;
 use function proc_terminate;
 use function stream_socket_get_name;
@@ -111,6 +113,21 @@ final class CurlTransportTest extends TestCase
         } catch (TransportException $e) {
             self::assertTrue($e->isTimeout());
             self::assertTrue($e->isAfterSend());
+        }
+    }
+
+    public function testAbortCancelsARequestInFlightAndIsNotRetried(): void
+    {
+        $started = microtime(true);
+        $transport = new CurlTransport(10.0, 2.0, static fn(): bool => microtime(true) - $started >= 1.0);
+        try {
+            $transport->send(new HttpRequest('POST', self::$base . '/sleep/3000', [], '{}'));
+            self::fail('Expected TransportException');
+        } catch (TransportException $e) {
+            self::assertLessThan(2.0, microtime(true) - $started);
+            self::assertTrue($e->isCancelled());
+            self::assertFalse($e->isTimeout());
+            self::assertNull((new RetryPolicy())->delayMs(1, $e));
         }
     }
 

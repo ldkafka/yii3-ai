@@ -238,10 +238,10 @@ prompts.
 | `ConfigurationException` | Unknown model or provider, missing key, invalid params |
 | `CapabilityException` | The model lacks what the request needs (`$e->missing`) |
 | `ProviderException` | The provider answered with an error: `$e->kind` (`ErrorKind`), `httpStatus`, `errorType`, `requestId`, `retryAfter` |
-| `TransportException` | No answer: DNS, TLS, connect or timeout (`isTimeout()`) |
+| `TransportException` | No answer: DNS, TLS, connect, timeout (`isTimeout()`) or a cancel (`isCancelled()`) |
 | `ContextOverflowException` | The newest turn alone exceeds the window budget |
 | `ToolException` | Thrown by tools; its message goes to the model |
-| `McpException` | A remote MCP server failed (`httpStatus`, `rpcCode`) |
+| `McpException` | A remote MCP server failed (`httpStatus`, `rpcCode`, `retryAfter`) |
 
 `RetryMiddleware` retries rate limits that carry `retry-after`, overloaded and server errors,
 provider timeouts and connection failures before the request was sent: at most 2 retries, waiting
@@ -253,6 +253,8 @@ a `retry-after` over 60 seconds (the exception carries `retryAfter`, so a queue 
 ## Transports
 
 `CurlTransport` is the default: one reused connection, TLS verification on, no redirects.
+To cancel a call in flight (a shutdown, a user who gave up), pass `abort: fn(): bool => $worker->stopping()`:
+curl asks about once a second, and `true` ends the call with a `TransportException` that is `isCancelled()`.
 `Psr18Transport` uses any PSR-18 client, with that client's timeouts and redirect rules. Guzzle and the
 Symfony client follow redirects by default; turn that off in the client you inject, because a redirect
 can resend the request, with its `Authorization` header, to another URL.

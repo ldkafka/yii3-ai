@@ -128,6 +128,24 @@ final class McpHttpClientTest extends TestCase
         self::assertCount(3, $transport->requests);
     }
 
+    public function testRateLimitCarriesRetryAfterAndIsNotRetried(): void
+    {
+        $transport = new QueueTransport([
+            self::json(self::INIT),
+            new HttpResponse(202, [], ''),
+            new HttpResponse(429, ['Retry-After' => '2'], ''),
+        ]);
+
+        try {
+            (new McpHttpClient('https://mcp.example.test/mcp', $transport))->callTool('t', []);
+            self::fail('Expected McpException');
+        } catch (McpException $e) {
+            self::assertSame(429, $e->httpStatus);
+            self::assertSame(2.0, $e->retryAfter);
+        }
+        self::assertCount(3, $transport->requests);
+    }
+
     public function testCloseWithoutSessionSendsNothing(): void
     {
         $transport = new QueueTransport();

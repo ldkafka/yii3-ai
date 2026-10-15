@@ -5,6 +5,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 [Semantic Versioning](https://semver.org/). In 0.x a minor release may break the API; such a release
 has a "Backwards compatibility" section. Patch releases never do.
 
+## [0.1.2] - 2026-10-15
+
+### Added
+- `CurlTransport` takes an optional `$abort` callback (`fn(): bool`). curl calls it while a request
+  runs, about once a second even when idle; returning true cancels the request with a
+  `TransportException` whose new `isCancelled()` is true. A cancelled call is never retried.
+- `HttpResponse::retryAfter()`: the seconds of a numeric `retry-after` header. The Anthropic mapper
+  now uses it, so there is one parser.
+- `McpException::$retryAfter`: the server's `retry-after` on a non-2xx answer. `McpHttpClient` still
+  does not retry on its own; the caller decides.
+
 ## [0.1.1] - 2026-10-12
 
 ### Changed

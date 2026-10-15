@@ -310,7 +310,12 @@ final class McpHttpClient
             } catch (JsonException) {
             }
 
-            throw new McpException(sprintf('MCP server answered HTTP %d to %s%s', $response->status, $method, $detail), $response->status, $code);
+            throw new McpException(
+                sprintf('MCP server answered HTTP %d to %s%s', $response->status, $method, $detail),
+                $response->status,
+                $code,
+                retryAfter: $response->retryAfter(),
+            );
         }
 
         if ($method === 'initialize') {

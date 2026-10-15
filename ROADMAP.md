@@ -5,7 +5,7 @@ The order and timing below follow real use of the package. They are plans, not p
 ## 0.1.x
 
 - Anthropic conformance fixtures recorded from the live API, replacing the hand-written ones.
-- Fixes from real use.
+- Fixes and small additions from real use.
 
 ## 0.2
 

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Ldkafka\Ai\Http;
 
+use function is_numeric;
 use function strtolower;
+use function trim;
 
 /**
  * One HTTP answer. Header names are stored in lower case.
@@ -34,5 +36,19 @@ final readonly class HttpResponse
     public function header(string $name): ?string
     {
         return $this->headers[strtolower($name)] ?? null;
+    }
+
+    /**
+     * Seconds from a numeric retry-after header; null when it is absent, a date or negative.
+     */
+    public function retryAfter(): ?float
+    {
+        $value = $this->header('retry-after');
+        if ($value === null || !is_numeric(trim($value))) {
+            return null;
+        }
+        $seconds = (float) trim($value);
+
+        return $seconds >= 0 ? $seconds : null;
     }
 }
